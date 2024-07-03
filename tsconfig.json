@@ -32,8 +32,7 @@
     "**/*.spec.js",
     "**/*.spec.jsx",
     "**/*.spec.cjs",
-    "**/*.spec.mjs",
-    "src/lang"
+    "**/*.spec.mjs"
   ],
   "references": [
     {
