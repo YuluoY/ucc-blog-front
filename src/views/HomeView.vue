@@ -1,5 +1,5 @@
 <template>
-  <div class="home">Home</div>
+  <div class="home">Home {{ $t('message.hello') }}</div>
 </template>
 <script setup lang="ts">
 defineOptions({

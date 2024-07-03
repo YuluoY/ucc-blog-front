@@ -1,5 +1,5 @@
 <template>
-  <h1>Template-Vue-TS</h1>
+  <RouterView></RouterView>
 </template>
 
 <script setup lang="ts"></script>
