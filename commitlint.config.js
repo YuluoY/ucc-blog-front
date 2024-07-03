@@ -1,5 +1,5 @@
 // more：https://github.com/angular/angular/blob/main/CONTRIBUTING.md
-export default {
+module.exports = {
   extends: ['@commitlint/config-conventional'],
   rules: {
     'type-enum': [

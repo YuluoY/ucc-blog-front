@@ -9,7 +9,7 @@
     "build:dev": "vite build --mode development",
     "build:prod": "vite build --mode production",
     "format": "prettier \"src/**/*.{vue,js,ts,jsx,tsx}\" --write .",
-    "prepare": "npx husky init",
+    "prepare": "husky",
     "lint": "eslint --ext .js,.ts,.vue --ignore-path .gitignore .",
     "lint:fix": "eslint \"src/**/*.{js,jsx,vue,ts,tsx}\" --fix --ignore-path .gitignore .",
     "test": "echo \"Error: no test specified\" && exit 1"
