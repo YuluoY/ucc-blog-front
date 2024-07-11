@@ -46,7 +46,7 @@ export default defineConfig({
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
     alias: {
       '@': SRC_PATH,
-      components: COMPONENTS_PATH
+      '@/components': COMPONENTS_PATH
     }
   },
   css: {
