@@ -1,7 +1,8 @@
 import { defineConfig } from 'vite'
+import { fileURLToPath, URL } from 'node:url'
+
 import vue from '@vitejs/plugin-vue'
 import eslintPlugin from 'vite-plugin-eslint'
-import { fileURLToPath, URL } from 'node:url'
 import AutoImport from 'unplugin-auto-import/vite'
 import UnCompoent from 'unplugin-vue-components/vite'
 
@@ -42,6 +43,16 @@ export default defineConfig({
       cache: false
     })
   ],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
+  },
+
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
     alias: {
