@@ -17,6 +17,9 @@ importers:
       normalize.css:
         specifier: ^8.0.1
         version: 8.0.1
+      ucc-utils:
+        specifier: ^0.0.11
+        version: 0.0.11
       vue:
         specifier: ^3.4.21
         version: 3.4.21(typescript@5.4.3)
@@ -39,9 +42,6 @@ importers:
       '@rushstack/eslint-patch':
         specifier: ^1.8.0
         version: 1.8.0
-      '@types/axios':
-        specifier: ^0.14.0
-        version: 0.14.0
       '@types/node':
         specifier: '18'
         version: 18.19.26
@@ -442,31 +442,26 @@ packages:
     resolution: {integrity: sha512-Iu0Kno1vrD7zHQDxOmvweqLkAzjxEVqNhUIXBsZ8hu8Oak7/5VTPrxOEZXYC1nmrBVJp0ZcL2E7lSuuOVaE3+w==}
     cpu: [arm64]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-arm64-musl@4.13.0':
     resolution: {integrity: sha512-C31QrW47llgVyrRjIwiOwsHFcaIwmkKi3PCroQY5aVq4H0A5v/vVVAtFsI1nfBngtoRpeREvZOkIhmRwUKkAdw==}
     cpu: [arm64]
     os: [linux]
-    libc: [musl]
 
   '@rollup/rollup-linux-riscv64-gnu@4.13.0':
     resolution: {integrity: sha512-Oq90dtMHvthFOPMl7pt7KmxzX7E71AfyIhh+cPhLY9oko97Zf2C9tt/XJD4RgxhaGeAraAXDtqxvKE1y/j35lA==}
     cpu: [riscv64]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-x64-gnu@4.13.0':
     resolution: {integrity: sha512-yUD/8wMffnTKuiIsl6xU+4IA8UNhQ/f1sAnQebmE/lyQ8abjsVyDkyRkWop0kdMhKMprpNIhPmYlCxgHrPoXoA==}
     cpu: [x64]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-x64-musl@4.13.0':
     resolution: {integrity: sha512-9RyNqoFNdF0vu/qqX63fKotBh43fJQeYC98hCaf89DYQpv+xu0D8QFSOS0biA7cGuqJFOc1bJ+m2rhhsKcw1hw==}
     cpu: [x64]
     os: [linux]
-    libc: [musl]
 
   '@rollup/rollup-win32-arm64-msvc@4.13.0':
     resolution: {integrity: sha512-46ue8ymtm/5PUU6pCvjlic0z82qWkxv54GTJZgHrQUuZnVH+tvvSP0LsozIDsCBFO4VjJ13N68wqrKSeScUKdA==}
@@ -485,10 +480,6 @@ packages:
 
   '@rushstack/eslint-patch@1.8.0':
     resolution: {integrity: sha512-0HejFckBN2W+ucM6cUOlwsByTKt9/+0tWhqUffNIcHqCXkthY/mZ7AuYPK/2IIaGWhdl0h+tICDO0ssLMd6XMQ==}
-
-  '@types/axios@0.14.0':
-    resolution: {integrity: sha512-KqQnQbdYE54D7oa/UmYVMZKq7CO4l8DEENzOKc4aBRwxCXSlJXGz83flFx5L7AWrOQnmuN3kVsRdt+GZPPjiVQ==}
-    deprecated: This is a stub types definition for axios (https://github.com/mzabriskie/axios). axios provides its own type definitions, so you don't need @types/axios installed!
 
   '@types/conventional-commits-parser@5.0.0':
     resolution: {integrity: sha512-loB369iXNmAZglwWATL+WRe+CRMmmBPtpolYzIebFaX4YA3x+BEfLqhUAV9WanycKI3TG1IMr5bMJDajDKLlUQ==}
@@ -1657,6 +1648,9 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
+  ucc-utils@0.0.11:
+    resolution: {integrity: sha512-vzUurbKMvSG5t9jMh9yG58ydTSIC/AFrTqgpuhDoVn2jAy5DV0z4l2fgv3Gw+dHKG8LHyowwLQ2ZApvq9gwtvg==}
+
   ufo@1.5.3:
     resolution: {integrity: sha512-Y7HYmWaFwPUmkoQCUIAYpKqkOf+SbVj/2fJJZ4RJMCfZp0rTGwRbzQD+HghfnhKOjL9E01okqz+ncJskGYfBNw==}
 
@@ -2150,12 +2144,6 @@ snapshots:
     optional: true
 
   '@rushstack/eslint-patch@1.8.0': {}
-
-  '@types/axios@0.14.0':
-    dependencies:
-      axios: 1.7.2
-    transitivePeerDependencies:
-      - debug
 
   '@types/conventional-commits-parser@5.0.0':
     dependencies:
@@ -3339,6 +3327,8 @@ snapshots:
   type-fest@0.20.2: {}
 
   typescript@5.4.3: {}
+
+  ucc-utils@0.0.11: {}
 
   ufo@1.5.3: {}
 
