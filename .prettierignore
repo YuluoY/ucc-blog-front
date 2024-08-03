@@ -11,3 +11,8 @@
 **/*.less
 **/*.scss
 
+.eslintrc.js
+.eslintignore
+.prettierignore
+.prettierrc
+tsconfig.json

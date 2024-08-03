@@ -42,3 +42,8 @@ dist-ssr
 *.sw?
 
 components.d.ts
+.eslintrc.js
+.eslintignore
+.prettierignore
+.prettierrc
+tsconfig.json
