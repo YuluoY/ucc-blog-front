@@ -6,10 +6,18 @@ import '@/assets/styles/index.scss'
 
 import router from '@/router'
 import i18n from './locales/index'
+import ui from './ui'
 
-const app = createApp(App).use(router)
-app.mount('#app')
+import beforehand from './beforehand'
 
+const app = createApp(App)
+
+app.use(router)
 app.use(i18n)
+app.use(ui)
+
+beforehand(app).then(() => {
+  app.mount('#app')
+})
 
 export default app

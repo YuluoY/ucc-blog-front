@@ -19,7 +19,8 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "src/auto-import.d.ts"
+    "src/auto-import.d.ts",
+    "./global.d.ts"
   ],
   // 不需要被编译的目录/文件
   "exclude": [

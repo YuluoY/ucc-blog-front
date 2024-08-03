@@ -1,9 +1,13 @@
+<style scoped lang="scss"></style>
+
 <template>
-  <div class="home">Home {{ $t('message.hello') }}</div>
+  <div class="home">
+    <LayoutBase></LayoutBase>
+  </div>
 </template>
+
 <script setup lang="ts">
 defineOptions({
   name: 'HomeView'
 })
 </script>
-<style scoped lang="scss"></style>

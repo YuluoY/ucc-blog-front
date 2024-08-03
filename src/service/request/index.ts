@@ -23,19 +23,19 @@ class AppRequest {
 
     // 每个instance实例都添加拦截器
     this.instance.interceptors.request.use(
-      (config) => {
+      config => {
         // loading/token
         return config
       },
-      (err) => {
+      err => {
         return err
       }
     )
     this.instance.interceptors.response.use(
-      (res) => {
+      res => {
         return res.data
       },
-      (err) => {
+      err => {
         return err
       }
     )
@@ -60,14 +60,14 @@ class AppRequest {
     return new Promise<T>((resolve, reject) => {
       this.instance
         .request<any, T>(config)
-        .then((res) => {
+        .then(res => {
           // 单词响应的成功拦截处理
           if (config.interceptors?.responseSuccessFn) {
             res = config.interceptors.responseSuccessFn(res)
           }
           resolve(res)
         })
-        .catch((err) => {
+        .catch(err => {
           reject(err)
         })
     })
