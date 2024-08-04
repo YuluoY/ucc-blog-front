@@ -52,9 +52,7 @@ class AppRequest {
   // T => IHomeData
   request<T = any>(config: IAppRequestConfig<T>) {
     // 单次请求的成功拦截处理
-    if (config.interceptors?.requestSuccessFn) {
-      config = config.interceptors.requestSuccessFn(config)
-    }
+    if (config.interceptors?.requestSuccessFn) config = config.interceptors.requestSuccessFn(config)
 
     // 返回Promise
     return new Promise<T>((resolve, reject) => {
@@ -62,9 +60,8 @@ class AppRequest {
         .request<any, T>(config)
         .then(res => {
           // 单词响应的成功拦截处理
-          if (config.interceptors?.responseSuccessFn) {
-            res = config.interceptors.responseSuccessFn(res)
-          }
+          if (config.interceptors?.responseSuccessFn) res = config.interceptors.responseSuccessFn(res)
+
           resolve(res)
         })
         .catch(err => {

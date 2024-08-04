@@ -18,8 +18,8 @@ importers:
         specifier: ^8.0.1
         version: 8.0.1
       ucc-utils:
-        specifier: ^0.0.11
-        version: 0.0.11
+        specifier: ^0.1.1
+        version: 0.1.1
       vue:
         specifier: ^3.4.21
         version: 3.4.21(typescript@5.4.3)
@@ -2368,8 +2368,8 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  ucc-utils@0.0.11:
-    resolution: {integrity: sha512-vzUurbKMvSG5t9jMh9yG58ydTSIC/AFrTqgpuhDoVn2jAy5DV0z4l2fgv3Gw+dHKG8LHyowwLQ2ZApvq9gwtvg==}
+  ucc-utils@0.1.1:
+    resolution: {integrity: sha512-6qWX4U/zJedEMqBshD5ER3l//Cyv+wkQ6xAwH0jcrYzkaaO+hk77upsjxmKPFLJZtl4h8e00Fh+/ma6Ongkj6Q==}
 
   ufo@1.5.3:
     resolution: {integrity: sha512-Y7HYmWaFwPUmkoQCUIAYpKqkOf+SbVj/2fJJZ4RJMCfZp0rTGwRbzQD+HghfnhKOjL9E01okqz+ncJskGYfBNw==}
@@ -4836,7 +4836,7 @@ snapshots:
 
   typescript@5.4.3: {}
 
-  ucc-utils@0.0.11: {}
+  ucc-utils@0.1.1: {}
 
   ufo@1.5.3: {}
 

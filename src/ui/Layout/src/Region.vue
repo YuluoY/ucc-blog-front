@@ -1,5 +1,5 @@
 <template>
-  <div class="u-region region-container" :style="regionStyles">
+  <div :class="['u-region', 'region-container']" :style="regionStyles">
     <slot></slot>
   </div>
 </template>
@@ -11,17 +11,9 @@ import type { URegionProps } from '../types'
 defineOptions({
   name: 'URegion'
 })
-
+const rootFontSize = inject('rootFontSize') as number
 const props = withDefaults(defineProps<URegionProps>(), {})
 
 const regionStyles: CSSProperties = {}
-
-if (props.region === 'center') {
-  regionStyles.flex = 1
-  regionStyles.flexGrow = 1
-}
-
-if (props.width) {
-  regionStyles.width = props.width / 100 + 'vw'
-}
+props.width && (regionStyles.width = props.width / rootFontSize + 'rem')
 </script>

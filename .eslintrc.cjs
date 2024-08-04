@@ -29,7 +29,7 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
     'prettier/prettier': [
-      'error',
+      'warn',
       {
         printWidth: 120,
         bracketSpacing: true, // 对象大括号内是否需要空格
@@ -37,6 +37,7 @@ module.exports = {
         arrowParens: 'avoid' // 箭头函数只有一个参数时候不需要括号
       }
     ],
+    curly: ['error', 'multi-or-nest', 'consistent'], // 大括号风格要求
     'no-multiple-empty-lines': ['error', { max: 2, maxEOF: 1, maxBOF: 0 }] // 最多允许2个空行
   }
 }
