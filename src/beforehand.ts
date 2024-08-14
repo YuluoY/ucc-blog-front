@@ -1,4 +1,4 @@
-import '@/app'
+import '@/app/index'
 import type { App } from 'vue'
 import { CTheme } from './types/const'
 import { useRootFontSize } from 'ucc-utils/hooks'

@@ -5,6 +5,7 @@
     <u-region region="center">center</u-region>
     <u-region region="right">right</u-region>
   </u-layout>
+  <u-button></u-button>
 </template>
 <script setup lang="ts"></script>
 <style scoped lang="scss"></style>
