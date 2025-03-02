@@ -8,10 +8,14 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     HeaderBar: typeof import('./components/HeaderBar.vue')['default']
+    HeadNav: typeof import('./components/HeadNav/HeadNav.vue')['default']
     LayoutBase: typeof import('./components/LayoutBase.vue')['default']
     LeftSidebar: typeof import('./components/LeftSidebar.vue')['default']
+    Menu: typeof import('./components/Menu/src/Menu.vue')['default']
+    MenuItem: typeof import('./components/Menu/src/MenuItem.vue')['default']
     RightSidebar: typeof import('./components/RightSidebar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SubMenu: typeof import('./components/Menu/src/SubMenu.vue')['default']
   }
 }

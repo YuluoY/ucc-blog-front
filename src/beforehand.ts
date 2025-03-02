@@ -1,15 +1,15 @@
 import '@/app/index'
 import type { App } from 'vue'
 import { CTheme } from './types/const'
-import { useRootFontSize } from 'ucc-utils/hooks'
+import { useRootFontSize } from './utils'
 
 export default async function beforehand(app: App): Promise<void> {
   /**
    * 设置根字体大小
    */
   useRootFontSize({
-    setRootFontSize: size => (window.UApp.rootFontSize = size),
-    isAuto: true
+    beforeRefreshCallback: size => (window.UApp.rootFontSize = size),
+    immediate: true
   })
 
   /**

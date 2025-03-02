@@ -2,7 +2,7 @@ import type { Theme } from '@/types'
 export declare interface UApp {
   prefix: string // 前缀 key
   localKey: string // 本地存储 key
-  rootFontSize: number // 根字体大小
+  rootFontSize: number | undefined // 根字体大小
   theme: Theme // 当前主题
   switchTheme(theme: Theme): void // 切换主题
 }
