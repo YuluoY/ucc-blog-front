@@ -5,7 +5,7 @@
   "singleQuote": true,
   "trailingComma": "none",
   "semi": false,
-  "endOfLine": "lf",
+  "endOfLine": "auto",
   "bracketSpacing": true,
   "arrowParens": "avoid",
   "overrides": [

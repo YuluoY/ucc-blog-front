@@ -2,7 +2,9 @@
 
 <template>
   <div class="home">
-    <LayoutBase></LayoutBase>
+    <u-layout>
+      <u-region region="center"> home </u-region>
+    </u-layout>
   </div>
 </template>
 

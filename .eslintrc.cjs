@@ -28,16 +28,19 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
+    'vue/multi-word-component-names': 'off',
+    'vue/no-reserved-component-names': 'off',
     'prettier/prettier': [
       'warn',
       {
         printWidth: 120,
         bracketSpacing: true, // 对象大括号内是否需要空格
-        endOfLine: 'lf', // 允许自动检测换行符
+        endOfLine: 'auto', // 允许自动检测换行符
         arrowParens: 'avoid' // 箭头函数只有一个参数时候不需要括号
       }
     ],
     curly: ['error', 'multi-or-nest', 'consistent'], // 大括号风格要求
-    'no-multiple-empty-lines': ['error', { max: 2, maxEOF: 1, maxBOF: 0 }] // 最多允许2个空行
+    'no-multiple-empty-lines': ['error', { max: 2, maxEOF: 1, maxBOF: 0 }], // 最多允许2个空行
+    'linebreak-style': 'off' // 或者使用 'windows'
   }
 }
