@@ -738,3 +738,36 @@ export const fillTemplate = (template: string, data: Record<string, any> | any[]
     return (data as Record<string, any>)[key] as string
   })
 }
+
+/**
+ * px与rem转换
+ * @author      Yuluo
+ * @link        https://github.com/YuluoY
+ * @date        2024-10-18
+ * @param       {number}  px  - px值
+ * @returns     {number}
+ * @example
+ * ```ts
+ * const px = 100
+ * const rem = pxToRem(px) // 100
+ *
+ * const rem = 10
+ * const px = pxToRem(rem, { isReverse: true }) // 100
+ *
+ * const px2 = pxToRem(rem, { isReverse: true, rootFontSize: 16 }) // 100
+ * const rem2 = pxToRem(px2) // 10
+ * ```
+ */
+export const pxToRem = (
+  px: number,
+  opts: Partial<{
+    isReverse: boolean
+    rootFontSize: number
+  }> = {}
+) => {
+  const { isReverse = false, rootFontSize = parseInt(document.documentElement.style.fontSize, 10) } = opts
+
+  if (!rootFontSize) return px
+
+  return isReverse ? px * rootFontSize : px / rootFontSize
+}

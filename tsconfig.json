@@ -6,6 +6,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "components": ["./src/components/*"],
+      "ucc-utils": ["./src/utils/index.ts"]
     },
     "types": ["vite/client"]
   },

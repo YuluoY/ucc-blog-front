@@ -10,7 +10,7 @@ export declare interface UApp {
 window.UApp = reactive({
   prefix: 'UCC-BLOG-',
   localKey: 'UCC-BLOG-UApp',
-  rootFontSize: parseInt(document.documentElement.style.fontSize),
+  rootFontSize: 16,
   theme: document.documentElement.getAttribute('theme') as Theme,
   switchTheme: (theme: Theme) => document.documentElement.setAttribute('theme', theme)
 })

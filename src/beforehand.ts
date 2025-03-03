@@ -8,6 +8,7 @@ export default async function beforehand(app: App): Promise<void> {
    * 设置根字体大小
    */
   useRootFontSize({
+    rootFontSize: window.UApp.rootFontSize,
     beforeRefreshCallback: size => (window.UApp.rootFontSize = size),
     immediate: true
   })

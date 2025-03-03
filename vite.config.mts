@@ -13,7 +13,7 @@ const SRC_PATH = fileURLToPath(new URL('./src', import.meta.url))
 
 // 导入全局样式文件，可以引入多个
 const GLOBAL_STYLES = `
-  @import "@/assets/styles/variables.scss";
+  @use "@/assets/styles/variables.scss" as *;
 `
 
 export default defineConfig({
@@ -57,7 +57,8 @@ export default defineConfig({
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
     alias: {
       '@': SRC_PATH,
-      '@/components': COMPONENTS_PATH
+      '@/components': COMPONENTS_PATH,
+      'ucc-utils': fileURLToPath(new URL('./src/utils/index.ts', import.meta.url))
     }
   },
   css: {

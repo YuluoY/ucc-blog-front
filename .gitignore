@@ -27,3 +27,6 @@ dist-ssr
 pnpm-lock.yaml
 src/auto-import.d.ts
 src/components.d.ts
+
+*.css
+*.css.map
