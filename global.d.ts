@@ -13,7 +13,7 @@ declare global {
 
 declare module 'vue-router' {
   interface RouteMeta {
-    title: string
+    title?: string
     isHidden?: boolean
     isRoute?: boolean
   }

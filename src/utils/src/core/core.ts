@@ -744,8 +744,12 @@ export const fillTemplate = (template: string, data: Record<string, any> | any[]
  * @author      Yuluo
  * @link        https://github.com/YuluoY
  * @date        2024-10-18
- * @param       {number}  px  - px值
- * @returns     {number}
+ * @param       {number}    px  - px值
+ * @param       {object}    opts  - 配置项
+ * @param       {boolean}   [opts.isReverse=false]  - 是否反转
+ * @param       {string}    [opts.unit]             - 单位，如果存在，则返回字符串
+ * @param       {number}    [opts.rootFontSize]     - 根字体大小
+ * @returns     {number | string}
  * @example
  * ```ts
  * const px = 100
@@ -758,16 +762,21 @@ export const fillTemplate = (template: string, data: Record<string, any> | any[]
  * const rem2 = pxToRem(px2) // 10
  * ```
  */
-export const pxToRem = (
+export function pxToRem<T = string | number>(
   px: number,
   opts: Partial<{
     isReverse: boolean
+    unit: string
     rootFontSize: number
   }> = {}
-) => {
-  const { isReverse = false, rootFontSize = parseInt(document.documentElement.style.fontSize, 10) } = opts
+): T {
+  const {
+    isReverse = false,
+    unit,
+    rootFontSize = parseInt(document.documentElement.style.fontSize, 10) || window.innerWidth / 100
+  } = opts
 
-  if (!rootFontSize) return px
+  const result = isReverse ? px * rootFontSize : px / rootFontSize
 
-  return isReverse ? px * rootFontSize : px / rootFontSize
+  return unit ? (`${result}${unit}` as T) : (result as T)
 }

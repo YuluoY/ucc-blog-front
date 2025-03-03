@@ -7,6 +7,7 @@ import '@/assets/styles/index.scss'
 import router from '@/router'
 import i18n from './locales/index'
 import UccUI from 'ucc-ui'
+import 'ucc-ui/dist/index.css'
 
 import beforehand from './beforehand'
 

@@ -1,13 +1,18 @@
 import type { Router } from 'vue-router'
 import dynamicRoutes from './dynamic'
+
 const permission = (router: Router) => {
   let isAddDynamicRoutes = false
 
-  router.beforeEach((to, from, next) => {
+  router.beforeEach(async (to, from, next) => {
     if (!isAddDynamicRoutes) {
-      isAddDynamicRoutes = true
+      // 1. 添加动态路由
       dynamicRoutes.forEach(route => router.addRoute(route))
-      return next({ ...to, replace: true })
+      window.UApp.addRoutes(router.getRoutes())
+      isAddDynamicRoutes = true
+      // 2. 触发重定向
+      next({ ...to, replace: true })
+      return
     }
 
     next()

@@ -17,6 +17,9 @@ const GLOBAL_STYLES = `
 `
 
 export default defineConfig({
+  build: {
+    manifest: true
+  },
   plugins: [
     vue(),
     AutoImport({

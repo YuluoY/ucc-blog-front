@@ -1,20 +1,45 @@
+import type { UMenuType } from './const'
+
 export interface UMenuProps {
   /**
-   * 菜单类型
+   * @description 菜单类型
+   * @type {UMenuType}
    */
-  type?: 'horizontal' | 'vertical'
+  type?: UMenuType
+
+  /**
+   * @description 默认选中的路由
+   * @type {string}
+   */
+  defaultActive?: string
 }
 
 export interface UMenuItemProps {
   /**
-   * 路由
+   * @description 路由
+   * @type {string}
    */
   route?: string
 }
 
 export interface USubMenuProps {
   /**
-   * 标题
+   * @description 标题
+   * @type {string}
    */
   title?: string
+}
+
+export interface UMenuContext {
+  /**
+   * @description 菜单类型
+   * @type {UMenuType}
+   */
+  type?: UMenuType
+
+  /**
+   * @description 默认选中的路由
+   * @type {string}
+   */
+  defaultActive?: string
 }

@@ -6,7 +6,7 @@ const HomeView = () => import('@/views/HomeView.vue')
 const AboutView = () => import('@/views/AboutView.vue')
 const NotFoundView = () => import('@/views/NotFoundView.vue')
 
-const routes: readonly RouteRecordRaw[] = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/',
     redirect: '/home'
@@ -14,20 +14,30 @@ const routes: readonly RouteRecordRaw[] = [
   {
     path: '/home',
     name: 'home',
-    component: HomeView
+    component: HomeView,
+    meta: {
+      title: '首页',
+      isRoute: true
+    }
   },
   {
     path: '/about',
     name: 'about',
-    component: AboutView
+    component: AboutView,
+    meta: {
+      title: '关于',
+      isRoute: true
+    }
   },
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
-    component: NotFoundView
+    component: NotFoundView,
+    meta: {
+      isHidden: true
+    }
   }
 ]
-
 const router = VueRouter.createRouter({
   history: VueRouter.createWebHistory(),
   routes: routes

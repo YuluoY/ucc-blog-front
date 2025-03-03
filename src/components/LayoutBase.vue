@@ -20,20 +20,24 @@ defineOptions({
   name: 'LayoutBase'
 })
 
-console.log(pxToRem(100))
+const topNavHeight = computed<string>(() => pxToRem(64, { unit: 'rem' }))
+const bottomInfoHeight = computed<string>(() => pxToRem(80, { unit: 'rem' }))
+const centerHeight = computed<string>(
+  () => `calc(100vh - ${parseInt(topNavHeight.value, 10)} - ${parseInt(bottomInfoHeight.value, 10)})`
+)
 </script>
 
 <style lang="scss" scoped>
 .u-layout-base {
   min-height: inherit;
   .u-region-top {
-    height: 3rem;
+    height: v-bind(topNavHeight);
   }
   .u-region-center {
-    height: calc(100vh - 8rem);
+    height: v-bind(centerHeight);
   }
   .u-region-bottom {
-    height: 5rem;
+    height: v-bind(bottomInfoHeight);
   }
 }
 </style>
