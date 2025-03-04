@@ -1,4 +1,4 @@
-import { cloneDeep, startsWith } from 'lodash-es'
+import { cloneDeep, isNil, startsWith } from 'lodash-es'
 import type { ConvertRoutesToLevelOptions } from './types/core'
 import { isStringArray, isStringFunction, isStringNumber, isStringObject } from './judge'
 import {
@@ -743,7 +743,7 @@ export const fillTemplate = (template: string, data: Record<string, any> | any[]
  * px与rem转换
  * @author      Yuluo
  * @link        https://github.com/YuluoY
- * @date        2024-10-18
+ * @date        2024-03-03
  * @param       {number}    px  - px值
  * @param       {object}    opts  - 配置项
  * @param       {boolean}   [opts.isReverse=false]  - 是否反转
@@ -776,7 +776,34 @@ export function pxToRem<T = string | number>(
     rootFontSize = parseInt(document.documentElement.style.fontSize, 10) || window.innerWidth / 100
   } = opts
 
+  if (isNil(px)) return px
+
   const result = isReverse ? px * rootFontSize : px / rootFontSize
 
   return unit ? (`${result}${unit}` as T) : (result as T)
+}
+
+/**
+ * 添加自定义分隔符
+ * @author      Yuluo
+ * @link        https://github.com/YuluoY
+ * @date        2024-03-04
+ * @param       {string}  str  - 字符串
+ * @param       {number}  count  - 分隔符数量
+ * @param       {string}  [separator='\n']  - 分隔符
+ * @returns     {string}
+ * @example
+ * ```ts
+ * const str = '1234567890'
+ * const result = addCustomSeparator(str, 3) // '123\n456\n789\n0'
+ *
+ * const str2 = '1234567890'
+ * const result2 = addCustomSeparator(str2, 3, '-') // '123-456-789-0'
+ * ```
+ */
+export const addCustomSeparator = (str: string, count: number, separator = '\n') => {
+  return str.split('').reduce((result, char, index) => {
+    if ((index + 1) % count === 0 && index < str.length - 1) return result + char + separator
+    return result + char
+  }, '')
 }

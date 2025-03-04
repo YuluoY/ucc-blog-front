@@ -27,21 +27,24 @@
 
 <script setup lang="ts">
 import { UMenu, UMenuItem, USubMenu } from '@/components/Menu'
-import { useRouter } from 'vue-router'
+import { useRouter, type RouteRecordRaw } from 'vue-router'
 defineOptions({
   name: 'HeadNav'
 })
 
 const router = useRouter()
 const routes = computed(() =>
-  window.UApp.routes.filter(v => v.name && v.path.split('/').length === 2 && !v.meta?.isHidden)
+  window.UApp.routes.filter((v: RouteRecordRaw) => v.name && v.path.split('/').length === 2 && !v.meta?.isHidden)
 )
 
-const logo = ref(new URL('@/assets/images/11.jpg', import.meta.url).href)
+const logo = ref(window.UApp.logo)
 </script>
 
 <style lang="scss" scoped>
 .head-nav {
+  min-height: inherit;
+  box-shadow: var(--uc-shadow-2);
+  background-color: var(--uc-background-1);
   padding: 0.5rem 1rem;
   .head-nav-logo {
     .head-nav-logo-img {

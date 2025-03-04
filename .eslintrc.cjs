@@ -35,7 +35,7 @@ module.exports = {
       {
         printWidth: 120,
         bracketSpacing: true, // 对象大括号内是否需要空格
-        endOfLine: 'auto', // 允许自动检测换行符
+        // endOfLine: false, // 允许自动检测换行符
         arrowParens: 'avoid' // 箭头函数只有一个参数时候不需要括号
       }
     ],

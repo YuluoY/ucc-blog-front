@@ -3,11 +3,12 @@
 import { App } from 'vue'
 import Layout from '@/ui/Layout/src/Layout.vue'
 import Region from '@/ui/Layout/src/Region.vue'
-import type { UApp } from '@/app'
+import type { UApp, UAppFn } from '@/app'
 
 declare global {
   interface Window {
     UApp: UApp
+    UAppFn: UAppFn
   }
 }
 

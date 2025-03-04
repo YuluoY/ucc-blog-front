@@ -1,6 +1,6 @@
 <template>
   <u-layout class="u-layout-base">
-    <u-region region="top" class="u-region-top">
+    <u-region region="top" class="u-region-top" ref="navRef">
       <HeadNav></HeadNav>
     </u-region>
     <u-region region="center" class="u-region-center">
@@ -16,28 +16,45 @@
 import HeadNav from '@/components/HeadNav'
 import BottomInfo from '@/components/BottomInfo'
 import { pxToRem } from 'ucc-utils'
+import type { URegion } from 'ucc-ui'
 defineOptions({
   name: 'LayoutBase'
 })
 
-const topNavHeight = computed<string>(() => pxToRem(64, { unit: 'rem' }))
-const bottomInfoHeight = computed<string>(() => pxToRem(80, { unit: 'rem' }))
-const centerHeight = computed<string>(
-  () => `calc(100vh - ${parseInt(topNavHeight.value, 10)} - ${parseInt(bottomInfoHeight.value, 10)})`
+const navRef = ref<InstanceType<typeof URegion>>()
+
+const topNavHeight = computed<string>(() => pxToRem(window.UApp.navHeight, { unit: 'rem' }))
+const bottomInfoHeight = computed<string>(() => pxToRem(window.UApp.footerHeight, { unit: 'rem' }))
+const centerHeight = ref<string>(
+  `calc(100vh - ${pxToRem(navRef.value?.$el?.offsetHeight, { unit: 'rem' })} - ${bottomInfoHeight.value})`
 )
+
+watch(
+  () => topNavHeight.value,
+  () => {
+    console.log('asdasdasd')
+    nextTick(() => {
+      centerHeight.value = `calc(100vh - ${pxToRem(navRef.value?.$el?.offsetHeight, { unit: 'rem' })} - ${bottomInfoHeight.value})`
+    })
+  }
+)
+
+onMounted(() => {
+  console.log(navRef.value?.$el?.offsetHeight)
+})
 </script>
 
 <style lang="scss" scoped>
 .u-layout-base {
   min-height: inherit;
   .u-region-top {
-    height: v-bind(topNavHeight);
+    min-height: v-bind(topNavHeight);
   }
   .u-region-center {
-    height: v-bind(centerHeight);
+    min-height: v-bind(centerHeight);
   }
   .u-region-bottom {
-    height: v-bind(bottomInfoHeight);
+    min-height: v-bind(bottomInfoHeight);
   }
 }
 </style>

@@ -10,6 +10,9 @@
     },
     "types": ["vite/client"]
   },
+  "globals": {
+    "UApp": true
+  },
   // 继承一些基本配置
   "extends": ["@vue/tsconfig/tsconfig.json", "@vue/tsconfig/tsconfig.lib.json"],
   // 需要被编译的目录/文件

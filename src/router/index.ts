@@ -5,7 +5,7 @@ import permission from './promission'
 const HomeView = () => import('@/views/HomeView.vue')
 const AboutView = () => import('@/views/AboutView.vue')
 const NotFoundView = () => import('@/views/NotFoundView.vue')
-
+const FieldView = () => import('@/views/FieldView.vue')
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
@@ -26,6 +26,15 @@ const routes: RouteRecordRaw[] = [
     component: AboutView,
     meta: {
       title: '关于',
+      isRoute: true
+    }
+  },
+  {
+    path: '/field',
+    name: 'field',
+    component: FieldView,
+    meta: {
+      title: '田野',
       isRoute: true
     }
   },
