@@ -41,10 +41,10 @@ export default defineConfig({
     UnCompoent({
       dts: 'src/components.d.ts',
       dirs: [COMPONENTS_PATH]
-    }),
-    eslintPlugin({
-      cache: false
     })
+    // eslintPlugin({
+    //   cache: false
+    // })
   ],
   server: {
     proxy: {

@@ -763,24 +763,23 @@ export const fillTemplate = (template: string, data: Record<string, any> | any[]
  * ```
  */
 export function pxToRem<T = string | number>(
-  px: number,
+  val: number,
   opts: Partial<{
     isReverse: boolean
-    unit: string
+    isNumber: boolean
     rootFontSize: number
   }> = {}
 ): T {
   const {
     isReverse = false,
-    unit,
-    rootFontSize = parseInt(document.documentElement.style.fontSize, 10) || window.innerWidth / 100
+    isNumber = false,
+    rootFontSize = parseInt(getComputedStyle(document.documentElement).fontSize, 10) || window.innerWidth / 100
   } = opts
 
-  if (isNil(px)) return px
-
-  const result = isReverse ? px * rootFontSize : px / rootFontSize
-
-  return unit ? (`${result}${unit}` as T) : (result as T)
+  if (isNil(val)) return val as T
+  const unit = isReverse ? 'px' : 'rem'
+  const result = isReverse ? val * rootFontSize : val / rootFontSize
+  return (isNumber ? result : `${result}${unit}`) as T
 }
 
 /**

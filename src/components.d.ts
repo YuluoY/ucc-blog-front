@@ -7,15 +7,12 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    Bottom: typeof import('./components/BottomInfo/Bottom.vue')['default']
-    BottomInfo: typeof import('./components/BottomInfo/BottomInfo.vue')['default']
-    HeaderBar: typeof import('./components/HeaderBar.vue')['default']
-    HeadNav: typeof import('./components/HeadNav/HeadNav.vue')['default']
+    BottomInfo: typeof import('./components/BottomInfo.vue')['default']
+    HeadNav: typeof import('./components/HeadNav.vue')['default']
+    HomeHero: typeof import('./components/HomeHero.vue')['default']
     LayoutBase: typeof import('./components/LayoutBase.vue')['default']
-    LeftSidebar: typeof import('./components/LeftSidebar.vue')['default']
     Menu: typeof import('./components/Menu/src/Menu.vue')['default']
     MenuItem: typeof import('./components/Menu/src/MenuItem.vue')['default']
-    RightSidebar: typeof import('./components/RightSidebar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SubMenu: typeof import('./components/Menu/src/SubMenu.vue')['default']

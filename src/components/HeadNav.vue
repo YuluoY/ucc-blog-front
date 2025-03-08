@@ -1,8 +1,11 @@
 <template>
   <u-layout class="head-nav" mode="row">
-    <u-region class="head-nav-logo" :span="1" align="center" justify="center">
-      <div class="head-nav-logo-img" @click="router.push('/')">
+    <u-region class="head-nav-left" :span="navLeftWidth" align="center" justify="around" :title="name">
+      <div class="head-nav-left__image" @click="router.push('/')">
         <img :src="logo" alt="随机图片" />
+      </div>
+      <div class="head-nav-left__name">
+        <span>{{ name }}</span>
       </div>
     </u-region>
     <u-region class="head-nav-menu" justify="end">
@@ -37,17 +40,22 @@ const routes = computed(() =>
   window.$u.routes.filter((v: RouteRecordRaw) => v.name && v.path.split('/').length === 2 && !v.meta?.isHidden)
 )
 
-const logo = ref(window.$u.logo)
+const logo = computed(() => window.$u.logo)
+const name = computed(() => window.$u.name)
+const navLeftWidth = computed(() => window.$u.navLeftWidth)
 </script>
 
 <style lang="scss" scoped>
 .head-nav {
+  position: relative;
+  z-index: 100;
   min-height: inherit;
   box-shadow: var(--uc-shadow-2);
   background-color: var(--uc-background-1);
   padding: 0.5rem 1rem;
-  .head-nav-logo {
-    .head-nav-logo-img {
+  .head-nav-left {
+    overflow: hidden;
+    .head-nav-left__image {
       width: 3rem;
       height: 3rem;
       overflow: hidden;
@@ -58,6 +66,14 @@ const logo = ref(window.$u.logo)
         height: 100%;
         object-fit: contain;
       }
+    }
+    .head-nav-left__name {
+      flex: 1;
+      margin-left: 0.8rem;
+      display: inline-block;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
     }
   }
   .head-nav-menu {

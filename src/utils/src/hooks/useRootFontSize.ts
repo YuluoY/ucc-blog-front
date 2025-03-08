@@ -70,23 +70,20 @@ export default function useRootFontSize(options: URootFontSizeOptions): URootFon
     immediate = false,
     isResize = true,
     resizeTimeout = 300,
-    rootFontSize,
+    rootFontSize = window.innerWidth / 100,
     afterRefreshCallback,
     beforeRefreshCallback
   } = options
 
   let rootFontSizeValue = rootFontSize
-  // 如果rootFontSize有值，已知当前根字体大小为16，则计算占比
-  const ratio = rootFontSize ? window.innerWidth / rootFontSize : window.innerWidth / 16
+  const ratio = rootFontSizeValue / window.innerWidth
 
   /**
    * 刷新根字体大小
    */
   const refreshRootFontSize = (): void => {
     isFunction(beforeRefreshCallback) && beforeRefreshCallback(rootFontSizeValue)
-    // 根据比例计算当前根字体大小
-    rootFontSizeValue = Number((window.innerWidth / ratio).toFixed(2))
-    document.documentElement.style.fontSize = `${rootFontSizeValue}px`
+    document.documentElement.style.fontSize = `${window.innerWidth * ratio}px`
     isFunction(afterRefreshCallback) && afterRefreshCallback(rootFontSizeValue)
   }
 

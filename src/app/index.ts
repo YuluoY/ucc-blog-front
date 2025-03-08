@@ -1,17 +1,15 @@
-import type { Theme } from '@/types'
 import state from './state'
-import fns from './fns'
+import fn from './fn'
 
-const UApp = state
-const UAppFn = fns
+const $u = state
 
 /**
  * 监听主题变化
  */
-watch(() => UApp.theme, UAppFn.switchTheme)
+watch(() => $u.theme, fn.switchTheme)
 
-window.UApp = UApp
-window.UAppFn = UAppFn
+window.$u = $u
+window.$uFn = fn
 
-export declare type UApp = typeof UApp
-export declare type UAppFn = typeof UAppFn
+export declare type AppState = typeof state
+export declare type AppFn = typeof fn

@@ -1,4 +1,4 @@
-import AppRequest from './request'
+import { AppRequest } from 'ucc-utils'
 
 const request = new AppRequest({
   baseURL: import.meta.env.BASE_URL + '/api',

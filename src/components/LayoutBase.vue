@@ -1,12 +1,12 @@
 <template>
-  <u-layout class="u-layout-base">
-    <u-region region="top" class="u-region-top" ref="navRef">
+  <u-layout class="layout-base">
+    <u-region region="top" class="layout-base__top" ref="navRef">
       <HeadNav></HeadNav>
     </u-region>
-    <u-region region="center" class="u-region-center">
+    <u-region region="center" class="layout-base__center">
       <slot></slot>
     </u-region>
-    <u-region region="bottom" class="u-region-bottom">
+    <u-region region="bottom" class="layout-base__bottom">
       <BottomInfo></BottomInfo>
     </u-region>
   </u-layout>
@@ -17,43 +17,50 @@ import HeadNav from '@/components/HeadNav'
 import BottomInfo from '@/components/BottomInfo'
 import { pxToRem } from 'ucc-utils'
 import type { URegion } from 'ucc-ui'
+import { CENTER_HEIGHT_KEY } from '@/constants'
+
 defineOptions({
   name: 'LayoutBase'
 })
 
 const navRef = ref<InstanceType<typeof URegion>>()
 
-const topNavHeight = computed<string>(() => pxToRem(window.UApp.navHeight, { unit: 'rem' }))
-const bottomInfoHeight = computed<string>(() => pxToRem(window.UApp.footerHeight, { unit: 'rem' }))
-const centerHeight = ref<string>(
-  `calc(100vh - ${pxToRem(navRef.value?.$el?.offsetHeight, { unit: 'rem' })} - ${bottomInfoHeight.value})`
+const topNavHeight = computed<string>(() => pxToRem(window.$u.navHeight))
+const bottomInfoHeight = computed<string>(() => pxToRem(window.$u.footerHeight))
+const centerHeight = ref<string>('')
+
+provide(
+  CENTER_HEIGHT_KEY,
+  computed(() => centerHeight.value)
 )
 
-watch(
+const topNavHeightWatcher = watch(
   () => topNavHeight.value,
   () => {
-    console.log('asdasdasd')
     nextTick(() => {
-      centerHeight.value = `calc(100vh - ${pxToRem(navRef.value?.$el?.offsetHeight, { unit: 'rem' })} - ${bottomInfoHeight.value})`
+      centerHeight.value = `calc(100vh - ${pxToRem(navRef.value?.$el?.offsetHeight)})`
     })
+  },
+  {
+    immediate: true
   }
 )
 
-onMounted(() => {
-  console.log(navRef.value?.$el?.offsetHeight)
+onBeforeUnmount(() => {
+  topNavHeightWatcher()
 })
 </script>
 
 <style lang="scss" scoped>
-.u-layout-base {
+.layout-base {
   min-height: inherit;
-  .u-region-top {
+  .layout-base__top {
     min-height: v-bind(topNavHeight);
   }
-  .u-region-center {
+  .layout-base__center {
     min-height: v-bind(centerHeight);
   }
-  .u-region-bottom {
+  .layout-base__bottom {
     min-height: v-bind(bottomInfoHeight);
   }
 }
