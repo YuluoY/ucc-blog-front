@@ -3,7 +3,7 @@ import { faker } from '@faker-js/faker'
 import type { RouteRecordRaw } from 'vue-router'
 import { useEffectStyles } from './common'
 
-export default reactive({
+const state = reactive({
   /**
    ********* others *********
    */
@@ -93,3 +93,7 @@ export default reactive({
     maxWidth: 1200
   })
 })
+
+export type AppState = typeof state
+
+export default state

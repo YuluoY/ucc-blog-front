@@ -8,13 +8,13 @@ export default async function beforehand(app: App): Promise<void> {
    * 设置根字体大小
    */
   useRootFontSize({
-    rootFontSize: window.$u.rootFontSize,
-    beforeRefreshCallback: size => (window.$u.rootFontSize = size!),
+    rootFontSize: $u.rootFontSize,
+    beforeRefreshCallback: size => ($u.rootFontSize = size!),
     immediate: true
   })
 
   /**
    * 设置主题
    */
-  window.$u.theme = CTheme.DEFAULT
+  $u.theme = CTheme.DEFAULT
 }

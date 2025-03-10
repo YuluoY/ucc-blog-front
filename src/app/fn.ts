@@ -1,17 +1,14 @@
 import type { Theme } from '@/types'
 import type { RouteRecordRaw } from 'vue-router'
 import { computed, type ComputedRef } from 'vue'
-import type { AppState } from './index'
-import state from './state'
-import { isFunction } from 'lodash-es'
 
-class AppFn {
+class fn {
   /**
    * 获取应用状态
    * @example
    * const {
    *   heroTop: contentTop,
-   * } = window.$uFn.getAppState(
+   * } = $uFn.getAppState(
    *   ['heroTop'],
    *   {
    *     heroTop: (val: number) => pxToRem(val, { unit: 'rem' })
@@ -19,24 +16,24 @@ class AppFn {
    * )
    * @returns 应用状态
    */
-  static getAppState<T extends keyof AppState>(
-    names: T[],
-    cbs?: {
-      [K in T]?: (val: AppState[K]) => any
-    }
-  ): { [K in T]: ComputedRef<AppState[K]> } {
-    return names.reduce(
-      (acc, name) => {
-        if (!state[name]) {
-          console.warn(`getAppState: 应用状态${name}不存在`)
-          return acc
-        }
-        acc[name] = computed(() => (cbs?.[name] && isFunction(cbs[name]) ? cbs[name]!(state[name]) : state[name]))
-        return acc
-      },
-      {} as { [K in T]: ComputedRef<AppState[K]> }
-    )
-  }
+  // static getAppState<T extends keyof AppState>(
+  //   names: T[],
+  //   cbs?: {
+  //     [K in T]?: (val: AppState[K]) => any
+  //   }
+  // ): { [K in T]: ComputedRef<AppState[K]> } {
+  //   return names.reduce(
+  //     (acc, name) => {
+  //       if (!state[name]) {
+  //         console.warn(`getAppState: 应用状态${name}不存在`)
+  //         return acc
+  //       }
+  //       acc[name] = computed(() => (cbs?.[name] && isFunction(cbs[name]) ? cbs[name]!(state[name]) : state[name]))
+  //       return acc
+  //     },
+  //     {} as { [K in T]: ComputedRef<AppState[K]> }
+  //   )
+  // }
 
   /**
    * 切换主题
@@ -50,14 +47,14 @@ class AppFn {
    * @param routes - 路由
    */
   static addRoutes(routes: RouteRecordRaw[]) {
-    window.$u.routes = [...window.$u.routes, ...routes]
+    $u.routes = [...$u.routes, ...routes]
   }
   /**
    * 删除路由
    * @param routes - 路由
    */
   static removeRoutes(routes: RouteRecordRaw[]) {
-    window.$u.routes = window.$u.routes.filter((v: RouteRecordRaw) => !routes.includes(v))
+    $u.routes = $u.routes.filter((v: RouteRecordRaw) => !routes.includes(v))
   }
 
   /**
@@ -70,4 +67,6 @@ class AppFn {
   }
 }
 
-export default AppFn
+export type AppFn = typeof fn
+
+export default fn

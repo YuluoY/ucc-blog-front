@@ -37,12 +37,12 @@ defineOptions({
 
 const router = useRouter()
 const routes = computed(() =>
-  window.$u.routes.filter((v: RouteRecordRaw) => v.name && v.path.split('/').length === 2 && !v.meta?.isHidden)
+  $u.routes.filter((v: RouteRecordRaw) => v.name && v.path.split('/').length === 2 && !v.meta?.isHidden)
 )
 
-const logo = computed(() => window.$u.logo)
-const name = computed(() => window.$u.name)
-const navLeftWidth = computed(() => window.$u.navLeftWidth)
+const logo = computed(() => $u.logo)
+const name = computed(() => $u.name)
+const navLeftWidth = computed(() => $u.navLeftWidth)
 </script>
 
 <style lang="scss" scoped>

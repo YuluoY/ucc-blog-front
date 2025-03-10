@@ -25,8 +25,8 @@ defineOptions({
 
 const navRef = ref<InstanceType<typeof URegion>>()
 
-const topNavHeight = computed<string>(() => pxToRem(window.$u.navHeight))
-const bottomInfoHeight = computed<string>(() => pxToRem(window.$u.footerHeight))
+const topNavHeight = computed<string>(() => pxToRem($u.navHeight))
+const bottomInfoHeight = computed<string>(() => pxToRem($u.footerHeight))
 const centerHeight = ref<string>('')
 
 provide(

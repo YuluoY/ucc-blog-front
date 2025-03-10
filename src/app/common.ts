@@ -1,13 +1,12 @@
 import type { CSSProperties, Reactive } from 'vue'
 import { pxToRem } from 'ucc-utils'
-import { isNumber } from 'lodash-es'
 /**
  * 获取字体样式
  */
-export const useEffectStyles = (styles: Partial<CSSProperties>): Reactive<CSSProperties> => {
-  const style: Reactive<CSSProperties> = reactive(styles)
+export const useEffectStyles = <T extends CSSProperties>(styles: Partial<T>): Reactive<T> => {
+  const style: Reactive<T> = reactive(styles)
 
-  const transKeys: (keyof CSSProperties)[] = [
+  const transKeys: (keyof T)[] = [
     'fontSize',
     'fontWeight',
     'marginTop',
@@ -19,13 +18,13 @@ export const useEffectStyles = (styles: Partial<CSSProperties>): Reactive<CSSPro
     'paddingLeft'
   ]
   const keys = Object.keys(style)
-  const transform = (style: CSSProperties) => {
+  const transform = (style: T) => {
     for (let i = 0; i < keys.length; i++) {
       const key = keys[i]
-      // if (!transKeys.includes(key as keyof CSSProperties))
+      // if (!transKeys.includes(key as keyof T))
       //   continue
-      const val = style[key as keyof CSSProperties]
-      if (val && typeof val === 'number') style[key as keyof CSSProperties] = pxToRem(val)
+      const val = style[key as keyof T]
+      if (val && typeof val === 'number') style[key as keyof T] = pxToRem(val)
     }
   }
 

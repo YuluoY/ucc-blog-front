@@ -34,10 +34,10 @@ defineOptions({
 
 const router = useRouter()
 const routes = computed(() =>
-  window.$u.routes.filter((v: RouteRecordRaw) => v.name && v.path.split('/').length === 2 && !v.meta?.isHidden)
+  $u.routes.filter((v: RouteRecordRaw) => v.name && v.path.split('/').length === 2 && !v.meta?.isHidden)
 )
 
-const logo = ref(window.$u.logo)
+const logo = ref($u.logo)
 </script>
 
 <style lang="scss" scoped>

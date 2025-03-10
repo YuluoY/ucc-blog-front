@@ -1,15 +1,10 @@
 import state from './state'
 import fn from './fn'
 
-const $u = state
-
 /**
  * 监听主题变化
  */
-watch(() => $u.theme, fn.switchTheme)
+watch(() => state.theme, fn.switchTheme)
 
-window.$u = $u
+window.$u = state
 window.$uFn = fn
-
-export declare type AppState = typeof state
-export declare type AppFn = typeof fn
