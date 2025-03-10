@@ -15,10 +15,21 @@ interface UseWaterfallOptions extends UseMonitDomOptions {
    * 列间距
    */
   gap?: number
+
+  /**
+   * 默认加载行
+   */
+  defaultRow?: number
+
   /**
    * 是否懒加载
    */
   isLazy?: boolean
+
+  /**
+   * 是否自动懒加载
+   */
+  isAuto?: boolean
 
   /**
    * 是否监听窗口大小变化
@@ -82,7 +93,7 @@ const WaterfallItemStyle: CSSProperties = {
   alignItems: 'center',
   justifyContent: 'center',
   boxSizing: 'border-box',
-  transition: 'opacity 0.3s ease-in-out'
+  transition: 'opacity 0.3s ease-in-out, box-shadow 0.3s ease-in-out'
 }
 
 const WaterfallImageStyle: CSSProperties = {
@@ -131,28 +142,27 @@ export default function useWaterfall<
     id: any
   }[]
 >(data: T, options: UseWaterfallOptions): UseWaterfallReturn {
-
-  const { 
+  const {
     column,
-    gap = 0, 
-    isLazy = false, 
-    imgClass, 
-    margin = 20, 
+    gap = 0,
+    isLazy = false,
+    imgClass,
+    margin = 20,
     unit = 'px',
     placeholderImg,
+    isAuto = false,
+    defaultRow,
     isResize = false,
-    onLoading, 
-    loadCondition, 
+    onLoading,
+    loadCondition,
     onPixelTrans = (pixel: number) => pixel,
-    ...monitRest 
+    ...monitRest
   } = options
 
   const waterfall = ref<HTMLElement>()
   const waterfallItems = shallowRef<HTMLElement[]>([])
   const waterfallImages = shallowRef<HTMLImageElement[]>([])
-  const waterfallItemWidth = computed(
-    () => ((waterfall.value?.clientWidth || 0) - (gap * (column - 1))) / column
-  )
+  const waterfallItemWidth = computed(() => ((waterfall.value?.clientWidth || 0) - gap * (column - 1)) / column)
   const colsHeight = ref<number[]>(new Array(column).fill(0))
   const colMaxHeight = computed(() => Math.max(...colsHeight.value))
   const colMinHeightIndex = computed(() => colsHeight.value.indexOf(Math.min(...colsHeight.value)))
@@ -169,7 +179,7 @@ export default function useWaterfall<
       return () =>
         h(
           props.tag || 'div',
-          { ref: waterfall, class: WATERFALL_CLASS, style: WaterfallStyle},
+          { ref: waterfall, class: WATERFALL_CLASS, style: WaterfallStyle },
           _data.value.map((item, index) =>
             slots.default?.({
               item,
@@ -227,6 +237,8 @@ export default function useWaterfall<
     }
     // 监听窗口大小变化
     if (isResize) resizeWaterfall()
+
+    if (defaultRow) rowIndex.value = defaultRow - 1
   })
 
   /**
@@ -238,8 +250,7 @@ export default function useWaterfall<
     isLoading.value = true
     await update()
     await nextTick()
-    if (!trigger)
-    {
+    if (!trigger) {
       await loadImages()
       await nextTick()
     }
@@ -301,7 +312,7 @@ export default function useWaterfall<
             const colIndex = index
             // 设置默认图片样式
             setStyles(img, WaterfallImageStyle)
-            
+
             // 处理加载成功
             img.onload = _ => {
               resolve({
@@ -311,17 +322,16 @@ export default function useWaterfall<
                 colIndex
               })
             }
-            
+
             // 处理加载失败
             img.onerror = _ => {
               console.warn(`图片加载失败: ${img.src}`)
               // 设置默认使用占位图
               const item = images[colIndex]
-              if (Array.isArray(placeholderImg)) {
+              if (Array.isArray(placeholderImg))
                 item.src = placeholderImg[Math.floor(Math.random() * placeholderImg.length)]
-              } else {
-                item.src = placeholderImg || ''
-              }
+              else item.src = placeholderImg || ''
+
               img.onload = _ => {
                 resolve({
                   width: img.clientWidth,
@@ -371,7 +381,7 @@ export default function useWaterfall<
         const vH = window.innerHeight
         const vaild = loadCondition?.(entry, value)
         if (eBtn < vH && !isLoading.value && (vaild || !loadCondition)) {
-          rowIndex.value++
+          isAuto && rowIndex.value++
           onLoading?.()
         }
       }
@@ -385,7 +395,7 @@ export default function useWaterfall<
       ...monitRest
     })
   }
-  
+
   /**
    * 监听窗口大小变化
    */
@@ -437,20 +447,20 @@ function setStyles(item: HTMLElement | HTMLElement[], styles: CSSProperties) {
  */
 const getScrollbarWidth = (el: HTMLElement) => {
   // 创建一个带滚动条的div
-  const outer = document.createElement('div');
-  outer.style.visibility = 'hidden';
-  outer.style.overflow = 'scroll';
-  el.appendChild(outer);
-  
+  const outer = document.createElement('div')
+  outer.style.visibility = 'hidden'
+  outer.style.overflow = 'scroll'
+  el.appendChild(outer)
+
   // 创建一个内部div
-  const inner = document.createElement('div');
-  outer.appendChild(inner);
-  
+  const inner = document.createElement('div')
+  outer.appendChild(inner)
+
   // 计算滚动条宽度
-  const scrollbarWidth = outer.offsetWidth - inner.offsetWidth;
-  
+  const scrollbarWidth = outer.offsetWidth - inner.offsetWidth
+
   // 清理DOM
-  outer.parentNode?.removeChild(outer);
-  
-  return scrollbarWidth;
+  outer.parentNode?.removeChild(outer)
+
+  return scrollbarWidth
 }
