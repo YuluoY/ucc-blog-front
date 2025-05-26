@@ -19,6 +19,7 @@ defineOptions({
   width: 100%;
   height: fit-content;
   padding: 1rem;
+  padding-left: 0;
   box-sizing: border-box;
 }
 </style>

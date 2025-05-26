@@ -1,5 +1,3 @@
-import type { HandleExceptionOptions, HandleExceptionResult } from './types/except'
-
 /**
  * 异常处理函数
  * @author    Yuluo
@@ -15,24 +13,28 @@ import type { HandleExceptionOptions, HandleExceptionResult } from './types/exce
  * @example
  * ```js
  *  const getDataBind = getData.bind(this, '123')
- *  const [data, err] = await handleException(getDataBind, { onErrorFn: console.log })
+ *  const [err, data] = await tryit(getDataBind, { onErrorFn: console.log })
  * ```
  */
-export const handleException = async <T = any>(
+export const tryit = async <T = any>(
   fn: Function,
-  opts: HandleExceptionOptions
-): Promise<HandleExceptionResult<T>> => {
+  opts: {
+    isToThrow?: boolean
+    fnArgs?: any[]
+    onErrorFn?: (e: any) => void | null
+  }
+): Promise<[any, T]> => {
   const { fnArgs = [], isToThrow = false, onErrorFn = null } = opts
 
   const o = [] as unknown as [T, any]
   try {
-    o[0] = await fn(...fnArgs)
+    o[1] = await fn(...fnArgs)
   } catch (err: any) {
     if (isToThrow) throw new Error(err)
 
     if (onErrorFn && typeof onErrorFn === 'function') onErrorFn(err.message || err)
 
-    o[1] = err
+    o[0] = err
   }
   return o
 }

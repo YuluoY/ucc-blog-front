@@ -4,7 +4,7 @@ import { pxToRem } from 'ucc-utils'
  * 获取字体样式
  */
 export const useEffectStyles = <T extends CSSProperties>(styles: Partial<T>): Reactive<T> => {
-  const style: Reactive<T> = reactive(styles)
+  const style = reactive(styles) as Reactive<CSSProperties>
 
   const transKeys: (keyof T)[] = [
     'fontSize',
@@ -30,7 +30,7 @@ export const useEffectStyles = <T extends CSSProperties>(styles: Partial<T>): Re
 
   const fontWatcher = watch(
     () => style,
-    val => transform(val),
+    val => transform(val as T),
     {
       immediate: true,
       deep: true
@@ -41,5 +41,5 @@ export const useEffectStyles = <T extends CSSProperties>(styles: Partial<T>): Re
     fontWatcher()
   })
 
-  return style
+  return style as CSSProperties as Reactive<T>
 }

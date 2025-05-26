@@ -52,7 +52,7 @@ const logo = computed(() => $u.logo)
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  padding: 1rem;
+  padding-left: 1rem;
   box-sizing: border-box;
 
   .side-left__item {

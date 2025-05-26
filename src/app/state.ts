@@ -3,7 +3,25 @@ import { faker } from '@faker-js/faker'
 import type { RouteRecordRaw } from 'vue-router'
 import { useEffectStyles } from './common'
 
-const state = reactive({
+const state: {
+  prefix: string
+  localKey: string
+  rootFontSize: number
+  theme: Theme
+  navHeight: number
+  logo: string
+  routes: RouteRecordRaw[]
+  name: string
+  navLeftWidth: number
+  footerHeight: number
+  heroTop: number
+  heroTitle: string
+  heroDesc: string
+  heroContentGap: number
+  heroTitleStyle: Record<string, string | number>
+  heroDescStyle: Record<string, string | number>
+  articleListType: 'base' | 'waterfall' | 'card'
+} = reactive({
   /**
    ********* others *********
    */
@@ -91,7 +109,15 @@ const state = reactive({
     fontSize: 20,
     fontWeight: 400,
     maxWidth: 1200
-  })
+  }),
+
+  /**
+   ******** home article list *******
+   */
+  /**
+   * 首页文章列表类型
+   */
+  articleListType: 'base'
 })
 
 export type AppState = typeof state
