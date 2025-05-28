@@ -77,13 +77,13 @@ export default function useRootFontSize(options: URootFontSizeOptions): URootFon
 
   let rootFontSizeValue = rootFontSize
   const ratio = rootFontSizeValue / window.innerWidth
-
+  console.log(ratio, window.innerWidth * ratio)
   /**
    * 刷新根字体大小
    */
   const refreshRootFontSize = (): void => {
     isFunction(beforeRefreshCallback) && beforeRefreshCallback(rootFontSizeValue)
-    document.documentElement.style.fontSize = `${window.innerWidth * ratio}px`
+    document.documentElement.style.fontSize = `${window.innerWidth * (rootFontSizeValue / window.innerWidth) / window.devicePixelRatio}px`
     isFunction(afterRefreshCallback) && afterRefreshCallback(rootFontSizeValue)
   }
 

@@ -44,7 +44,7 @@ const logo = computed(() => $u.logo)
 <style scoped lang="scss">
 .side-left {
   position: sticky;
-  top: 1rem;
+  top: 0;
   left: 1rem;
   z-index: 100;
   width: 100%;
@@ -53,6 +53,7 @@ const logo = computed(() => $u.logo)
   flex-direction: column;
   overflow: hidden;
   padding-left: 1rem;
+  padding-top: 1rem;
   box-sizing: border-box;
 
   .side-left__item {

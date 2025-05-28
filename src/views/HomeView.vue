@@ -46,7 +46,6 @@ const ArticleList = computed<Component>(() => ArticleListStyles[$u.articleListTy
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin-top: 1rem;
     .home-content__loading {
       width: 100%;
       margin: 2rem 0;

@@ -47,9 +47,9 @@ const navLeftWidth = computed(() => $u.navLeftWidth)
 
 <style lang="scss" scoped>
 .head-nav {
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 100;
-  min-height: inherit;
   box-shadow: var(--uc-shadow-2);
   background-color: var(--uc-background-1);
   padding: 0.5rem 1rem;

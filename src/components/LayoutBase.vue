@@ -3,6 +3,7 @@
     <u-region region="top" class="layout-base__top">
       <HeadNav ref="headNavRef"></HeadNav>
       <HomeHero
+        v-if="route.path === '/' || route.path === '/home'"
         class="layout-base__hero"
         :style="{ height: centerHeight }"
         :title="heroTitle"
@@ -33,8 +34,8 @@
 </template>
 
 <script setup lang="ts">
-import HeadNav from '@/components/HeadNav'
-import BottomInfo from '@/components/BottomInfo'
+import HeadNav from '@/components/HeadNav.vue'
+import BottomInfo from '@/components/BottomInfo.vue'
 import { pxToRem } from 'ucc-utils'
 import { URegion } from 'ucc-ui'
 import { CENTER_HEIGHT_KEY } from '@/constants'
@@ -46,6 +47,7 @@ defineOptions({
 })
 
 const $u = window.$u
+const route = useRoute()
 
 const heroDesc = computed(() => $u.heroDesc)
 const heroTitle = computed(() => $u.heroTitle)
@@ -100,7 +102,7 @@ onBeforeUnmount(() => {
       position: relative;
     }
     .layout-center__center {
-      padding: 0 1rem;
+      padding: 1rem;
     }
   }
   .layout-base__bottom {
