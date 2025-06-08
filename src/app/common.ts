@@ -28,7 +28,7 @@ export const useEffectStyles = <T extends CSSProperties>(styles: Partial<T>): Re
     }
   }
 
-  const fontWatcher = watch(
+  watch(
     () => style,
     val => transform(val as T),
     {
@@ -36,10 +36,5 @@ export const useEffectStyles = <T extends CSSProperties>(styles: Partial<T>): Re
       deep: true
     }
   )
-
-  onBeforeUnmount(() => {
-    fontWatcher()
-  })
-
   return style as CSSProperties as Reactive<T>
 }

@@ -1,5 +1,5 @@
 <template>
-  <u-layout class="side-left" :gutter="10" mode="column">
+  <u-layout class="side-left" :gutter="16" mode="column">
     <u-region class="side-left__item">
       <u-card body-class="side-left__item-card" shadow="always" header="信息栏" collapse>
         <div class="side-left__item-logo">
@@ -45,20 +45,19 @@ const logo = computed(() => $u.logo)
 .side-left {
   position: sticky;
   top: 0;
-  left: 1rem;
-  z-index: 100;
+  left: 0;
+  z-index: 6;
   width: 100%;
-  height: fit-content;
+  height: 100%;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  padding-left: 1rem;
-  padding-top: 1rem;
   box-sizing: border-box;
 
   .side-left__item {
     width: 100%;
     height: fit-content;
+    flex: unset;
     :deep(.side-left__item-card) {
       width: 100%;
       height: fit-content;
@@ -81,28 +80,5 @@ const logo = computed(() => $u.logo)
       }
     }
   }
-  // .side-left__layout {
-  //   width: 100%;
-  //   height: 100%;
-  //   .side-left__item {
-  //     width: 100%;
-
-  //     .u-card {
-  //       width: fit-content;
-  //     }
-
-  //     .logo {
-  //       width: 4rem;
-  //       height: 4rem;
-  //       border-radius: 50%;
-  //       overflow: hidden;
-  //       img {
-  //         width: 100%;
-  //         height: 100%;
-  //         object-fit: contain;
-  //       }
-  //     }
-  //   }
-  // }
 }
 </style>

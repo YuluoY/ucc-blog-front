@@ -47,9 +47,9 @@ const navLeftWidth = computed(() => $u.navLeftWidth)
 
 <style lang="scss" scoped>
 .head-nav {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 100;
+  z-index: 101;
   box-shadow: var(--uc-shadow-2);
   background-color: var(--uc-background-1);
   padding: 0.5rem 1rem;
@@ -70,13 +70,18 @@ const navLeftWidth = computed(() => $u.navLeftWidth)
     .head-nav-left__name {
       flex: 1;
       margin-left: 0.8rem;
+      line-height: 1.5;
       display: inline-block;
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
+      font-size: 1.4rem;
     }
   }
   .head-nav-menu {
+    :deep(a) {
+      font-size: 1.4rem;
+    }
   }
 }
 </style>

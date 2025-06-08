@@ -1,22 +1,22 @@
 import { faker as faker } from '@faker-js/faker'
 
 export const fakeUser = {
-  name: faker.name.fullName()
+  name: faker.person.fullName()
 }
 
 export const fakeArticleList = Array.from({ length: 100 }).map((_, index) => {
   return {
-    id: faker.datatype.uuid(),
+    id: faker.string.uuid(),
     title: faker.lorem.sentence(),
     desc: faker.lorem.paragraphs(3).substring(0, 500),
-    cover: faker.image.imageUrl(),
-    author: faker.name.fullName(),
+    cover: faker.image.url(),
+    author: faker.person.fullName(),
     content: faker.lorem.paragraphs(),
-    tags: Array.from({ length: faker.datatype.number({ min: 1, max: 5 }) }).map(() => {
+    tags: Array.from({ length: faker.number.int({ min: 1, max: 5 }) }).map(() => {
       return {
-        id: faker.datatype.uuid(),
+        id: faker.string.uuid(),
         name: faker.lorem.word(),
-        count: faker.datatype.number({ min: 1, max: 100 }),
+        count: faker.number.int({ min: 1, max: 100 }),
         // color: faker.internet.color()
         color: faker.color.rgb({ format: 'css', casing: 'lower', prefix: '#' }).replace(/^#/, () => {
           // 生成浅色系,将RGB值调高
@@ -28,8 +28,8 @@ export const fakeArticleList = Array.from({ length: 100 }).map((_, index) => {
         })
       }
     }),
-    viewCount: faker.datatype.number({ min: 1, max: 1000 }),
-    likeCount: faker.datatype.number({ min: 1, max: 100 }),
+    viewCount: faker.number.int({ min: 1, max: 1000 }),
+    likeCount: faker.number.int({ min: 1, max: 100 }),
     createdAt: faker.date.recent().toISOString().split('T')[0],
     updatedAt: faker.date.recent().toISOString().split('T')[0],
     publishedAt: faker.date.recent().toISOString().split('T')[0]

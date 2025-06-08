@@ -1,13 +1,15 @@
-import { AppRequest } from 'ucc-utils'
+import type { Tables } from '@/types'
+import article from './article'
 
-const request = new AppRequest({
-  baseURL: import.meta.env.BASE_URL + '/api',
-  timeout: 5000,
-  interceptors: {
-    requestSuccessFn(cfg) {
-      return cfg
-    }
-  }
-})
+const tableApis = {
+  article
+}
 
-export default request
+type Apis = (table: Tables) => (typeof tableApis)[Tables]
+
+const api: Apis = table => {
+  // 在获取对应表的接口前，这里可以做更多处理...
+  return tableApis[table]
+}
+
+export default api

@@ -14,7 +14,9 @@
           <div class="tags">
             <u-tag v-for="tag in item.tags" :key="tag.id" :color="tag.color"> {{ tag.name }} </u-tag>
           </div>
-          <div class="desc">{{ item.desc }}</div>
+          <div class="desc">
+            <u-text type="default" ellipsis :max-line="3">{{ item.desc }}</u-text>
+          </div>
           <div class="info">
             <div class="info-left">
               <div class="publish-time info-item">
@@ -73,27 +75,30 @@ const props = withDefaults(
     display: flex;
     width: 100%;
     .article-item__card-img {
-      margin-right: 1.2rem;
+      width: 30rem;
+      margin-right: 1.6rem;
       img {
-        width: 30rem;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
       }
     }
     .article-item__main {
       width: 100%;
       display: flex;
       flex-direction: column;
+      flex: 1;
+      gap: 1.2rem;
       .title {
         width: 100%;
         font-size: 1.8rem;
         font-weight: 600;
         text-align: center;
-        margin-bottom: 1.2rem;
       }
       .author {
         width: 100%;
         display: flex;
         justify-content: center;
-        margin-bottom: 1.2rem;
         font-size: 1.4rem;
         font-weight: 500;
         span {
@@ -105,7 +110,6 @@ const props = withDefaults(
         width: 100%;
         display: flex;
         justify-content: center;
-        margin-bottom: 1.2rem;
         .u-tag ~ .u-tag {
           margin-left: 0.8rem;
         }

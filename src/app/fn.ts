@@ -1,6 +1,5 @@
 import type { Theme } from '@/types'
 import type { RouteRecordRaw } from 'vue-router'
-import { computed, type ComputedRef } from 'vue'
 
 class fn {
   /**

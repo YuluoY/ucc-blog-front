@@ -1,11 +1,10 @@
 <template>
   <u-layout class="layout-base">
-    <u-region region="top" class="layout-base__top">
-      <HeadNav ref="headNavRef"></HeadNav>
+    <u-region class="layout-base__top" region="top" :style="topStyles">
+      <HeadNav class="layout-base__nav" ref="headNavRef"></HeadNav>
       <HomeHero
-        v-if="route.path === '/' || route.path === '/home'"
+        v-show="isHomePage"
         class="layout-base__hero"
-        :style="{ height: centerHeight }"
         :title="heroTitle"
         :desc="heroDesc"
         :top="heroTop"
@@ -14,7 +13,7 @@
         :desc-style="descStyle"
       />
     </u-region>
-    <u-region region="center" class="layout-base__center">
+    <u-region region="center" class="layout-base__center" :style="centerStyles">
       <u-layout>
         <u-region region="left" class="layout-center__left">
           <SideLeft></SideLeft>
@@ -38,10 +37,10 @@ import HeadNav from '@/components/HeadNav.vue'
 import BottomInfo from '@/components/BottomInfo.vue'
 import { pxToRem } from 'ucc-utils'
 import { URegion } from 'ucc-ui'
-import { CENTER_HEIGHT_KEY } from '@/constants'
 import HomeHero from '@/components/HomeHero.vue'
 import SideLeft from '@/components/SideLeft.vue'
 import SideRight from '@/components/SideRight.vue'
+
 defineOptions({
   name: 'LayoutBase'
 })
@@ -60,53 +59,53 @@ const headNavRef = ref<InstanceType<typeof HeadNav>>()
 
 const topNavHeight = computed<string>(() => pxToRem($u.navHeight))
 const bottomInfoHeight = computed<string>(() => pxToRem($u.footerHeight))
-const centerHeight = ref<string>('')
 
-provide(
-  CENTER_HEIGHT_KEY,
-  computed(() => centerHeight.value)
-)
-
-const topNavHeightWatcher = watch(
-  () => topNavHeight.value,
-  () => {
-    nextTick(() => {
-      centerHeight.value = `calc(100vh - ${headNavRef.value?.$el?.clientHeight}px)`
-    })
-  },
-  {
-    immediate: true
-  }
-)
-
-onBeforeUnmount(() => {
-  topNavHeightWatcher()
-})
+const isHomePage = computed(() => route.path === '/' || route.path === '/home')
+const topStyles = computed(() => ({ height: isHomePage.value ? '100vh' : 'auto' }))
+const centerStyles = computed(() => ({
+  marginTop: isHomePage.value ? '1.6rem' : `calc(1.6rem + ${topNavHeight.value})`
+}))
 </script>
 
 <style lang="scss" scoped>
 .layout-base {
   min-height: inherit;
   .layout-base__top {
-    min-height: v-bind(topNavHeight);
+    height: 100vh;
+    max-height: 100vh;
+    position: relative;
     flex-direction: column;
+    .layout-base__nav {
+      height: v-bind(topNavHeight);
+    }
     .layout-base__hero {
-      min-height: v-bind(centerHeight);
+      flex: 1;
+      position: absolute;
+      top: 0;
+      height: calc(100vh - v-bind(topNavHeight));
+      margin-top: v-bind(topNavHeight);
     }
   }
   .layout-base__center {
+    margin: 1.6rem;
     // min-height: v-bind(centerHeight);
+    .layout-center__left {
+      margin-right: 1.6rem;
+    }
+    .layout-center__right {
+      margin-left: 1.6rem;
+    }
     .layout-center__left,
     .layout-center__right {
       width: 20%;
       position: relative;
     }
     .layout-center__center {
-      padding: 1rem;
     }
   }
   .layout-base__bottom {
-    min-height: v-bind(bottomInfoHeight);
+    height: v-bind(bottomInfoHeight);
+    margin-top: 1.6rem;
   }
 }
 </style>

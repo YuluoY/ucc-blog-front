@@ -2,8 +2,10 @@ import type { Theme } from '@/types'
 import { faker } from '@faker-js/faker'
 import type { RouteRecordRaw } from 'vue-router'
 import { useEffectStyles } from './common'
+import { CTheme } from '@/types/const'
+import type { Reactive } from 'vue'
 
-const state: {
+interface IState {
   prefix: string
   localKey: string
   rootFontSize: number
@@ -21,7 +23,9 @@ const state: {
   heroTitleStyle: Record<string, string | number>
   heroDescStyle: Record<string, string | number>
   articleListType: 'base' | 'waterfall' | 'card'
-} = reactive({
+}
+
+const state: Reactive<IState> = reactive({
   /**
    ********* others *********
    */
@@ -40,7 +44,7 @@ const state: {
   /**
    * 主题
    */
-  theme: document.documentElement.getAttribute('theme') as Theme,
+  theme: (document.documentElement.getAttribute('theme') as Theme) || CTheme.DEFAULT,
 
   /**
    ******** header nav *******
@@ -48,7 +52,7 @@ const state: {
   /**
    * 导航栏高度
    */
-  navHeight: 50,
+  navHeight: 60,
   /**
    * 导航栏logo
    */
@@ -56,7 +60,7 @@ const state: {
   /**
    * 路由信息
    */
-  routes: [] as RouteRecordRaw[],
+  routes: [],
   /**
    * 用户名称
    */

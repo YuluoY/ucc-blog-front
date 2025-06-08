@@ -17,9 +17,15 @@ defineOptions({
 <style scoped lang="scss">
 .side-right {
   width: 100%;
-  height: fit-content;
-  padding: 1rem;
+  height: 100%;
   padding-left: 0;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: sticky;
+  top: 0;
+  right: 0;
+  z-index: 6;
 }
 </style>

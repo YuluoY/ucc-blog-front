@@ -21,8 +21,8 @@ importers:
         specifier: ^8.0.1
         version: 8.0.1
       ucc-ui:
-        specifier: ^0.0.24
-        version: 0.0.24(vue@3.4.37(typescript@5.5.4))
+        specifier: ^0.0.30
+        version: 0.0.30(vue@3.4.37(typescript@5.5.4))
       vue:
         specifier: ^3.4.21
         version: 3.4.37(typescript@5.5.4)
@@ -2424,8 +2424,8 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  ucc-ui@0.0.24:
-    resolution: {integrity: sha512-wgxvZjIdKIE3ip/4hHhWyeG0juiLanemirU3ft0HU2fCKjZxKcXK1oVZi+UuPtYZqpib6Yojy8197MvCZE/q+g==}
+  ucc-ui@0.0.30:
+    resolution: {integrity: sha512-O3tIpA8MvLvwujq7Bf016zAUK0VwzPVhUSn8De9pw4fbqFbCYiQ9n68+bkwlppiPu1NzD6XSpHo2bA/MS54SVg==}
     peerDependencies:
       vue: ^3.4.19
 
@@ -4927,7 +4927,7 @@ snapshots:
 
   typescript@5.5.4: {}
 
-  ucc-ui@0.0.24(vue@3.4.37(typescript@5.5.4)):
+  ucc-ui@0.0.30(vue@3.4.37(typescript@5.5.4)):
     dependencies:
       '@fortawesome/fontawesome-svg-core': 6.6.0
       '@fortawesome/free-brands-svg-icons': 6.7.2
