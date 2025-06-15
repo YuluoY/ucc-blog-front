@@ -2,7 +2,7 @@
   <u-layout class="home">
     <u-region region="center" class="home-content" ref="cardListRef">
       <div class="home-content__inner">
-        <ArticleList :data="fakeArticleList"> </ArticleList>
+        <ArticleList :data="articleList"> </ArticleList>
         <!-- <UWaterfall class="home-content__waterfall">
           <template #default="{ item, index, styles, classname }">
             <u-card
@@ -29,14 +29,17 @@
   </u-layout>
 </template>
 <script setup lang="ts">
-import { fakeArticleList } from '@/mock'
 import ArticleListStyles from '@/components/ArticleListStyles'
 import type { Component } from 'vue'
+import api from '@/api'
+import { CTables } from '@/types/const'
 defineOptions({
   name: 'HomeView'
 })
 
 const ArticleList = computed<Component>(() => ArticleListStyles[$u.articleListType])
+const articleList = await api(CTables.ARTICLE).getArticleList()
+console.log(articleList)
 </script>
 
 <style scoped lang="scss">

@@ -19,7 +19,9 @@
           <SideLeft></SideLeft>
         </u-region>
         <u-region region="center" class="layout-center__center">
-          <slot></slot>
+          <Suspense>
+            <slot></slot>
+          </Suspense>
         </u-region>
         <u-region region="right" class="layout-center__right">
           <SideRight></SideRight>

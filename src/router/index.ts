@@ -6,6 +6,8 @@ const HomeView = () => import('@/views/HomeView.vue')
 const AboutView = () => import('@/views/AboutView.vue')
 const NotFoundView = () => import('@/views/NotFoundView.vue')
 const FieldView = () => import('@/views/FieldView.vue')
+const ReadView = () => import('@/views/ReadView.vue')
+
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
@@ -17,7 +19,8 @@ const routes: RouteRecordRaw[] = [
     component: HomeView,
     meta: {
       title: '首页',
-      isRoute: true
+      isRoute: true,
+      index: 1
     }
   },
   {
@@ -26,7 +29,8 @@ const routes: RouteRecordRaw[] = [
     component: AboutView,
     meta: {
       title: '关于',
-      isRoute: true
+      isRoute: true,
+      index: 2
     }
   },
   {
@@ -35,7 +39,18 @@ const routes: RouteRecordRaw[] = [
     component: FieldView,
     meta: {
       title: '田野',
-      isRoute: true
+      isRoute: true,
+      index: 3
+    }
+  },
+  {
+    path: '/read/:id',
+    name: 'read',
+    component: ReadView,
+    meta: {
+      title: '阅读',
+      isRoute: true,
+      isHidden: true
     }
   },
   {

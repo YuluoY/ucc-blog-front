@@ -1,7 +1,10 @@
+import type { Article } from '@/types/models/article'
 import { faker as faker } from '@faker-js/faker'
+import { createUser } from './user'
+import { createTag } from './tag'
 
-export const fakeUser = {
-  name: faker.person.fullName()
+const toCopy = (obj: any, { min = 1, max = 5 } = {}) => {
+  return Array.from({ length: faker.number.int({ min, max }) }).map(() => obj)
 }
 
 export const fakeArticleList = Array.from({ length: 100 }).map((_, index) => {
@@ -9,29 +12,17 @@ export const fakeArticleList = Array.from({ length: 100 }).map((_, index) => {
     id: faker.string.uuid(),
     title: faker.lorem.sentence(),
     desc: faker.lorem.paragraphs(3).substring(0, 500),
+    status: 'published',
     cover: faker.image.url(),
-    author: faker.person.fullName(),
-    content: faker.lorem.paragraphs(),
-    tags: Array.from({ length: faker.number.int({ min: 1, max: 5 }) }).map(() => {
-      return {
-        id: faker.string.uuid(),
-        name: faker.lorem.word(),
-        count: faker.number.int({ min: 1, max: 100 }),
-        // color: faker.internet.color()
-        color: faker.color.rgb({ format: 'css', casing: 'lower', prefix: '#' }).replace(/^#/, () => {
-          // 生成浅色系,将RGB值调高
-          const base = '#'
-          const r = Math.floor(Math.random() * 55 + 200).toString(16)
-          const g = Math.floor(Math.random() * 55 + 200).toString(16)
-          const b = Math.floor(Math.random() * 55 + 200).toString(16)
-          return base + r + g + b
-        })
-      }
-    }),
+    author: toCopy(createUser(), { max: 1 }),
+    content: faker.lorem.paragraphs(100),
+    protect: '',
+    commentCount: faker.number.int({ min: 1, max: 100 }),
+    tags: toCopy(createTag()),
     viewCount: faker.number.int({ min: 1, max: 1000 }),
     likeCount: faker.number.int({ min: 1, max: 100 }),
     createdAt: faker.date.recent().toISOString().split('T')[0],
     updatedAt: faker.date.recent().toISOString().split('T')[0],
     publishedAt: faker.date.recent().toISOString().split('T')[0]
-  }
+  } as Article
 })

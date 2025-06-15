@@ -37,7 +37,9 @@ defineOptions({
 
 const router = useRouter()
 const routes = computed(() =>
-  $u.routes.filter((v: RouteRecordRaw) => v.name && v.path.split('/').length === 2 && !v.meta?.isHidden)
+  $u.routes
+    .filter((v: RouteRecordRaw) => v.name && !v.meta?.isHidden)
+    .toSorted((a, b) => a.meta?.index! - b.meta?.index!)
 )
 
 const logo = computed(() => $u.logo)

@@ -20,6 +20,7 @@ declare module 'vue-router' {
     title?: string
     isHidden?: boolean
     isRoute?: boolean
+    index?: number
   }
 }
 
