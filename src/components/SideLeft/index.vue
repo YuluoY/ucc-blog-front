@@ -14,8 +14,9 @@
       </u-card>
     </u-region>
     <u-region class="side-left__item">
-      <u-card body-class="side-left__item-card" shadow="always" header="信息栏1" collapse>
-        {{ faker.lorem.sentence({ min: 50, max: 100 }) }}
+      <u-card body-class="side-left__item-card" shadow="always" header="最新文章" collapse>
+        <!-- {{ faker.lorem.sentence({ min: 50, max: 100 }) }} -->
+        <SideLeftItem1></SideLeftItem1>
       </u-card>
     </u-region>
     <u-region class="side-left__item">
@@ -32,13 +33,19 @@
 </template>
 
 <script setup lang="ts">
+import api from '@/api'
+import { CTables } from '@/types/const'
 import { faker } from '@faker-js/faker'
+import SideLeftItem1 from './SideLeftItem1.vue'
 
 defineOptions({
   name: 'SideLeft'
 })
 
 const logo = computed(() => $u.logo)
+const apis = api(CTables.ARTICLE)
+
+const articleList = apis.getArticleList()
 </script>
 
 <style scoped lang="scss">

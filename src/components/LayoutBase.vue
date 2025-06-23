@@ -40,7 +40,7 @@ import BottomInfo from '@/components/BottomInfo.vue'
 import { pxToRem } from 'ucc-utils'
 import { URegion } from 'ucc-ui'
 import HomeHero from '@/components/HomeHero.vue'
-import SideLeft from '@/components/SideLeft.vue'
+import SideLeft from '@/components/SideLeft/index.vue'
 import SideRight from '@/components/SideRight.vue'
 
 defineOptions({

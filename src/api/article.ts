@@ -9,6 +9,7 @@ export interface IArticleApis {
 
 const apis: IArticleApis = {
   getArticleList() {
+    console.log('getArticleList', fakeArticleList)
     return Promise.resolve(fakeArticleList)
   }
 }

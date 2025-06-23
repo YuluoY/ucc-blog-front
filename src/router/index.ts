@@ -5,7 +5,7 @@ import permission from './promission'
 const HomeView = () => import('@/views/HomeView.vue')
 const AboutView = () => import('@/views/AboutView.vue')
 const NotFoundView = () => import('@/views/NotFoundView.vue')
-const FieldView = () => import('@/views/FieldView.vue')
+const ArchiveView = () => import('@/views/ArchiveView.vue')
 const ReadView = () => import('@/views/ReadView.vue')
 
 const routes: RouteRecordRaw[] = [
@@ -30,17 +30,17 @@ const routes: RouteRecordRaw[] = [
     meta: {
       title: '关于',
       isRoute: true,
-      index: 2
+      index: 3
     }
   },
   {
-    path: '/field',
-    name: 'field',
-    component: FieldView,
+    path: '/archive',
+    name: 'archive',
+    component: ArchiveView,
     meta: {
-      title: '田野',
+      title: '归档',
       isRoute: true,
-      index: 3
+      index: 2
     }
   },
   {

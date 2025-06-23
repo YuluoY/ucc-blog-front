@@ -9,7 +9,7 @@
           <div class="title">{{ item.title }}</div>
           <div class="author">
             <span>作者：</span>
-            <span>{{ item.author }}</span>
+            <span v-for="(author, index) in item.author" :key="index">{{ author.namec || author.username }}</span>
           </div>
           <div class="tags">
             <u-tag v-for="tag in item.tags" :key="tag.id" :color="tag.color"> {{ tag.name }} </u-tag>
