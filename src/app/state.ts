@@ -52,7 +52,7 @@ const state: Reactive<IState> = reactive({
   /**
    * 导航栏高度
    */
-  navHeight: 60,
+  navHeight: 0,
   /**
    * 导航栏logo
    */

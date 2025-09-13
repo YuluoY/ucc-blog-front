@@ -1,5 +1,5 @@
 <template>
-  <u-layout class="head-nav" mode="row">
+  <u-layout class="head-nav" mode="row" ref="headNavElement">
     <u-region class="head-nav-left" :span="navLeftWidth" align="center" justify="around" :title="name">
       <div class="head-nav-left__image" @click="router.push('/')">
         <img :src="logo" alt="随机图片" />
@@ -31,6 +31,7 @@
 <script setup lang="ts">
 import { UMenu, UMenuItem, USubMenu } from '@/components/Menu'
 import { useRouter, type RouteRecordRaw } from 'vue-router'
+import type { ULayout } from 'ucc-ui'
 defineOptions({
   name: 'HeadNav'
 })
@@ -45,6 +46,13 @@ const routes = computed(() =>
 const logo = computed(() => $u.logo)
 const name = computed(() => $u.name)
 const navLeftWidth = computed(() => $u.navLeftWidth)
+
+// 暴露 DOM 元素
+const headNavElement = ref<InstanceType<typeof ULayout>>()
+
+defineExpose({
+  headNavElement
+})
 </script>
 
 <style lang="scss" scoped>

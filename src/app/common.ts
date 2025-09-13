@@ -6,20 +6,20 @@ import { pxToRem } from 'ucc-utils'
 export const useEffectStyles = <T extends CSSProperties>(styles: Partial<T>): Reactive<T> => {
   const style = reactive(styles) as Reactive<CSSProperties>
 
-  const transKeys: (keyof T)[] = [
-    'fontSize',
-    'fontWeight',
-    'marginTop',
-    'marginBottom',
-    'marginLeft',
-    'marginRight',
-    'paddingTop',
-    'paddingBottom',
-    'paddingLeft'
-  ]
+  // const transKeys: (keyof T)[] = [
+  //   'fontSize',
+  //   'fontWeight',
+  //   'marginTop',
+  //   'marginBottom',
+  //   'marginLeft',
+  //   'marginRight',
+  //   'paddingTop',
+  //   'paddingBottom',
+  //   'paddingLeft'
+  // ]
   const keys = Object.keys(style)
   const transform = (style: T) => {
-    for (let i = 0; i < keys.length; i++) {
+    for (let i = 0, len = keys.length; i < len; i++) {
       const key = keys[i]
       // if (!transKeys.includes(key as keyof T))
       //   continue

@@ -13,7 +13,7 @@
         :desc-style="descStyle"
       />
     </u-region>
-    <u-region region="center" class="layout-base__center" :style="centerStyles">
+    <u-region region="center" class="layout-base__center" :style="{ marginTop: isHomePage ? '0' : topNavHeight }">
       <u-layout>
         <u-region region="left" class="layout-center__left">
           <SideLeft></SideLeft>
@@ -59,14 +59,16 @@ const heroContentGap = computed<string>(() => pxToRem($u.heroContentGap))
 
 const headNavRef = ref<InstanceType<typeof HeadNav>>()
 
-const topNavHeight = computed<string>(() => pxToRem($u.navHeight))
+const topNavHeight = computed<string>(() => ($u.navHeight ? pxToRem($u.navHeight) : 'auto'))
+
 const bottomInfoHeight = computed<string>(() => pxToRem($u.footerHeight))
 
 const isHomePage = computed(() => route.path === '/' || route.path === '/home')
 const topStyles = computed(() => ({ height: isHomePage.value ? '100vh' : 'auto' }))
-const centerStyles = computed(() => ({
-  marginTop: isHomePage.value ? '1.6rem' : `calc(1.6rem + ${topNavHeight.value})`
-}))
+
+onMounted(() => {
+  if (headNavRef.value?.headNavElement?.$el) $uFn.setNavHeight(headNavRef.value.headNavElement.$el.clientHeight)
+})
 </script>
 
 <style lang="scss" scoped>
@@ -79,6 +81,7 @@ const centerStyles = computed(() => ({
     flex-direction: column;
     .layout-base__nav {
       height: v-bind(topNavHeight);
+      // height: fit-content;
     }
     .layout-base__hero {
       flex: 1;
@@ -89,7 +92,7 @@ const centerStyles = computed(() => ({
     }
   }
   .layout-base__center {
-    margin: 1.6rem;
+    padding: 1.6rem;
     // min-height: v-bind(centerHeight);
     .layout-center__left {
       margin-right: 1.6rem;
