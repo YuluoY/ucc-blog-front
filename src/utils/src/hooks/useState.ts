@@ -5,17 +5,21 @@ type UseStateResult<T> = [ShallowRef<T>, (newState: T) => void]
 
 export const useState = <T>(
   target: T,
-  callback?: (newState: T) => void
+  change?: (newState: T) => void
 ): DeepReadonly<UnwrapNestedRefs<UseStateResult<T>>> =>
 {
   const state = shallowRef<T>(target)
   
-  const setState = (newState: T) =>
+  const setState = (newState: T, callback?: (newState: T) => void) =>
   {
     if (Object.is(state.value, newState))
       return
     state.value = newState
-    nextTick(() => callback?.(newState))
+    nextTick(() =>
+    {
+      change?.(newState)
+      callback?.(newState)
+    })
   }
 
   return readonly<UseStateResult<T>>([

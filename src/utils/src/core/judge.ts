@@ -9,7 +9,8 @@
  * @date        2024-10-15
  * @return      {boolean}  如果是 CommonJS 模块环境则返回 true，否则返回 false
  */
-export const isCJS = (): boolean => {
+export const isCJS = (): boolean =>
+{
   if (
     // @ts-ignore
     typeof require === 'function' &&
@@ -35,7 +36,8 @@ export const isCJS = (): boolean => {
  * @date        2024-10-15
  * @return      {boolean}  如果是 ECMAScript 模块环境则返回 true，否则返回 false
  */
-export const isESM = (): boolean => {
+export const isESM = (): boolean =>
+{
   // @ts-ignore
   if (typeof require === 'function' && typeof module !== 'undefined' && module.exports) return false
 
@@ -65,7 +67,8 @@ export const isESM = (): boolean => {
  *  isPrimitive(() => {}) // false
  *  ```
  */
-export const isPrimitive = (val: any): val is boolean => {
+export const isPrimitive = (val: any): val is boolean =>
+{
   return (
     typeof val === 'number' ||
     typeof val === 'string' ||
@@ -97,15 +100,18 @@ export const isPrimitive = (val: any): val is boolean => {
  * hasWeightValue([]) // false
  * ```
  */
-export const hasWeightValue = (val: any): val is boolean => {
-  if (isPrimitive(val)) {
-    if (isSymbol(val)) return !!(val as unknown as symbol)?.description
-
+export const hasWeightValue = (val: any): val is boolean =>
+{
+  if (isPrimitive(val))
+  {
+    if (isSymbol(val))
+      return !!(val as unknown as symbol)?.description
     return !!val
   }
-  if (isArray(val)) return (val as unknown as any[]).length > 0
-
-  if (isObject(val)) return Object.keys(val).length > 0
+  if (isArray(val))
+    return (val as unknown as any[]).length > 0
+  if (isObject(val))
+    return Object.keys(val).length > 0
 
   return false
 }
@@ -217,7 +223,8 @@ export const isObject = (val: any): val is boolean => typeof val === 'object' &&
  *  isPlainObject(1) // false
  * ```
  */
-export const isPlainObject = (val: any): val is boolean => {
+export const isPlainObject = (val: any): val is boolean =>
+{
   if (typeof val !== 'object' || val === null) return false
   const proto = Object.getPrototypeOf(val)
   return proto === Object.prototype || proto === null
@@ -363,15 +370,19 @@ export const isInteger = (val: any): val is boolean => typeof val === 'number' &
  *  isJSONString('{"name": "John", "age": 30,}') // false
  * ```
  */
-export const isJSONString = (str: any): str is boolean => {
+export const isJSONString = (str: any): str is boolean =>
+{
   if (typeof str !== 'string') return false
   str = str.trim()
   // 判断两边是否有括号
   if (!str.startsWith('{') && !str.startsWith('[')) return false
-  try {
+  try
+  {
     JSON.parse(str)
     return true
-  } catch (e) {
+  }
+  catch (e)
+  {
     return false
   }
 }
@@ -391,7 +402,8 @@ const StringNumRegExp = /^\d+(\.\d+)?$/
  *  isStringNumber('abc') // false
  * ```
  */
-export const isStringNumber = (str: any): str is boolean => {
+export const isStringNumber = (str: any): str is boolean =>
+{
   if (typeof str !== 'string') return false
   return StringNumRegExp.test(str.trim())
 }
@@ -410,7 +422,8 @@ export const isStringNumber = (str: any): str is boolean => {
  *  isStringBoolean('abc') // false
  * ```
  */
-export const isStringBoolean = (str: any): str is boolean => {
+export const isStringBoolean = (str: any): str is boolean =>
+{
   if (typeof str !== 'string') return false
   return ['true', 'false'].includes(str.trim())
 }
@@ -463,7 +476,8 @@ export const isStringObject = (str: any): str is boolean =>
  *  isStringFunction('_=>{}') // true
  * ```
  */
-export const isStringFunction = (str: any): str is boolean => {
+export const isStringFunction = (str: any): str is boolean =>
+{
   if (typeof str !== 'string') return false
   // 去掉所有空格
   str = str.replace(/\s+/g, '')
@@ -483,7 +497,8 @@ const WinRegExps = [/Win/i, /Win(?:dows)?/i] as RegExp[]
  *  isWindows() // true or false
  * ```
  */
-export const isWindows = (navigator?: Navigator): boolean => {
+export const isWindows = (navigator?: Navigator): boolean =>
+{
   // 检查 navigator 是否存在，以确保在浏览器环境中运行
   if (typeof navigator !== 'undefined' && navigator.userAgent)
     return WinRegExps[0].test(navigator.platform) || WinRegExps[1].test(navigator.userAgent)
@@ -505,7 +520,8 @@ const MacRegExps = [/Mac(?:intosh|Intel|PPC|68K)/i, /Mac/i] as RegExp[]
  *  isMacOS() // true or false
  * ```
  */
-export const isMacOS = (navigator?: Navigator): boolean => {
+export const isMacOS = (navigator?: Navigator): boolean =>
+{
   if (typeof navigator !== 'undefined' && navigator.userAgent)
     return MacRegExps[0].test(navigator.platform) || MacRegExps[1].test(navigator.userAgent)
 
@@ -526,7 +542,8 @@ const MobileRegExp =
  *  isMobile() // true or false
  * ```
  */
-export const isMobile = (navigator?: Navigator): boolean => {
+export const isMobile = (navigator?: Navigator): boolean =>
+{
   if (typeof navigator !== 'undefined' && navigator.userAgent)
     return MobileRegExp.test(navigator.userAgent.toLocaleLowerCase())
 
@@ -581,8 +598,8 @@ const EmailRegExp =
 export const isEmail = (email: string): boolean => EmailRegExp.test(email)
 
 const PhoneRegExps: RegExp[] = [
-  /^(?:(?:\+|00)86)?1[3-9]\d{9}$/, //宽松模式
-  /^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-79])|(?:5[0-35-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[1589]))\d{8}$/ //严格模式
+  /^(?:(?:\+|00)86)?1[3-9]\d{9}$/, // 宽松模式
+  /^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-79])|(?:5[0-35-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[1589]))\d{8}$/ // 严格模式
 ]
 /**
  * 判断是否是移动手机号 - 有严格与宽松两种模式
@@ -625,7 +642,8 @@ export const isQQ = (qq: string): boolean => QQRegExp.test(qq)
  * isPromise(Promise.resolve()) // true
  * ```
  */
-export const isPromise = (obj: any): boolean => {
+export const isPromise = (obj: any): boolean =>
+{
   return !!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function'
 }
 
@@ -643,7 +661,8 @@ export const isPromise = (obj: any): boolean => {
  * isAsyncComponent(() => import('../index')) // false
  * ```
  */
-export const isAsyncComponent = (obj: any): boolean => {
+export const isAsyncComponent = (obj: any): boolean =>
+{
   return (
     !!obj && typeof obj === 'object' && obj.name === 'AsyncComponentWrapper' && typeof obj.__asyncLoader === 'function'
   )
@@ -663,7 +682,8 @@ export const isAsyncComponent = (obj: any): boolean => {
  * isVueComponent({}) // false
  * ```
  */
-export const isVueComponent = (obj: any): boolean => {
+export const isVueComponent = (obj: any): boolean =>
+{
   return (
     typeof obj === 'object' &&
     obj !== null &&
@@ -692,7 +712,8 @@ export const isVueComponent = (obj: any): boolean => {
  * isValue(NaN) // false
  * ```
  */
-export const isValue = (val: any): boolean => {
+export const isValue = (val: any): boolean =>
+{
   return val !== null && val !== undefined && !Number.isNaN(val)
 }
 

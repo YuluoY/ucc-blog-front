@@ -16,9 +16,12 @@ import { isPromise } from './judge'
  *  idleCallback(() => console.log('hello world'))
  * ```
  */
-export const idleCallback = (fn: Function): number => {
-  return window.requestIdleCallback(async (idle: IdleDeadline) => {
-    while (idle.timeRemaining() > 0) fn && typeof fn === 'function' && (await fn())
+export const idleCallback = (fn: Function): number =>
+{
+  return window.requestIdleCallback(async(idle: IdleDeadline) =>
+  {
+    while (idle.timeRemaining() > 0)
+      fn && typeof fn === 'function' && (await fn())
   })
 }
 
@@ -39,12 +42,17 @@ export const idleCallback = (fn: Function): number => {
 export const idleTaskQueue = (
   task: Function[] | Function,
   idleMap: WeakMap<Function, number> = new WeakMap()
-): void => {
+): void =>
+{
   if (!task) return task
-  if (Array.isArray(task)) {
+  if (Array.isArray(task))
+  
     idleTaskQueue(task, idleMap)
-  } else {
-    const idleId = window.requestIdleCallback(async idle => {
+  
+  else
+  {
+    const idleId = window.requestIdleCallback(async idle =>
+    {
       const isArr = Array.isArray(task)
       const fn = isArr ? task.shift() : task
       while (idle.timeRemaining() > 0) await fn()
@@ -77,22 +85,28 @@ export const concurRequest = async <T = any>(
   opts: {
     limit?: number
   } = {}
-): Promise<{ success: boolean; value: T | any }[]> => {
+): Promise<{ success: boolean; value: T | any }[]> =>
+{
   const { limit = 3 } = opts
   tasks = tasks.map((t: any) => (isPromise(t) ? t : Promise.resolve(t)))
 
   // eslint-disable-next-line no-async-promise-executor
-  return new Promise(async (resolve, reject) => {
+  return new Promise(async(resolve, reject) =>
+  {
     if (tasks.length === 0) return resolve([])
     const results = [] as { success: boolean; value: T | any }[]
     let nextIndex = 0
     let count = 0
-    const _request = async () => {
+    const _request = async() =>
+    {
       const i = nextIndex++
       const task = tasks[i] as Promise<T>
-      try {
+      try
+      {
         results[i] = { success: true, value: await task }
-      } catch (error) {
+      }
+      catch (error)
+      {
         results[i] = { success: false, value: error }
       }
     }

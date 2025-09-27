@@ -23,17 +23,19 @@ export const tryit = async <T = any>(
     fnArgs?: any[]
     onErrorFn?: (e: any) => void | null
   }
-): Promise<[any, T]> => {
+): Promise<[any, T]> =>
+{
   const { fnArgs = [], isToThrow = false, onErrorFn = null } = opts
 
   const o = [] as unknown as [T, any]
-  try {
+  try
+  {
     o[1] = await fn(...fnArgs)
-  } catch (err: any) {
+  }
+  catch (err: any)
+  {
     if (isToThrow) throw new Error(err)
-
     if (onErrorFn && typeof onErrorFn === 'function') onErrorFn(err.message || err)
-
     o[0] = err
   }
   return o

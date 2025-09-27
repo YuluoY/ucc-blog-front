@@ -14,11 +14,15 @@
  * ```
  */
 export const traceParentNode = (
+  // eslint-disable-next-line no-undef
   node: ParentNode,
   condition: (node: Node) => boolean,
   max: number = 10
-): ParentNode | HTMLElement | null => {
+// eslint-disable-next-line no-undef
+): ParentNode | HTMLElement | null =>
+{
   if (max <= 0 || node.nodeName === '#document') return null
   if (condition(node)) return node
+  // eslint-disable-next-line no-undef
   return traceParentNode(node?.parentNode as ParentNode, condition, max - 1)
 }

@@ -173,11 +173,14 @@ export const addQuotesToProps = (str: string): string => str.replace(AddQuotesTo
  *   ]
  * ```
  */
-export const convertRoutesToLevel = <T = any>(routes: T[], opts: ConvertRoutesToLevelOptions = {}): T[] => {
+export const convertRoutesToLevel = <T = any>(routes: T[], opts: ConvertRoutesToLevelOptions = {}): T[] =>
+{
   const { fld = 'id', glFld = 'parentId', childFld = 'children', isJudgeType = true, isChangeOwner = true } = opts
   const newRoutes: T[] = isChangeOwner ? routes : cloneDeep(routes)
-  for (const route of newRoutes as T[] | any[]) {
-    if (route[glFld]) {
+  for (const route of newRoutes as T[] | any[])
+  {
+    if (route[glFld])
+    {
       const parent: T | any = isJudgeType
         ? newRoutes.find((item: T | any) => item[fld] && item[fld] === route[glFld])
         : newRoutes.find((item: T | any) => item[fld] && item[fld] == route[glFld])
@@ -207,9 +210,11 @@ export const convertRoutesToLevel = <T = any>(routes: T[], opts: ConvertRoutesTo
  *  // { 'hello world': [ { name: 'hello world', age: 18 }, { name: 'hello world', age: 20 } ] }
  * ```
  */
-export const groupByProp = <T = any>(array: T[], prop: string): Record<string, T[]> | T[] => {
+export const groupByProp = <T = any>(array: T[], prop: string): Record<string, T[]> | T[] =>
+{
   if (!array?.length) return array
-  return array.reduce((acc: any, item: any) => {
+  return array.reduce((acc: any, item: any) =>
+  {
     const key = item[prop]
     ;(acc[key] || (acc[key] = [])).push(item)
     return acc
@@ -229,12 +234,16 @@ export const groupByProp = <T = any>(array: T[], prop: string): Record<string, T
  *  parseJSON('{"name": "hello world"}')  // {name: 'hello world'}
  * ```
  */
-export const parseJSON = <T = any>(str: string, defVal: T = {} as any): T => {
+export const parseJSON = <T = any>(str: string, defVal: T = {} as any): T =>
+{
   if (!str) return defVal
   if (typeof str !== 'string') return defVal
-  try {
+  try
+  {
     return JSON.parse(str)
-  } catch (e) {
+  }
+  catch (e)
+  {
     return defVal
   }
 }
@@ -251,8 +260,10 @@ export const parseJSON = <T = any>(str: string, defVal: T = {} as any): T => {
  *  capitalizeForWord('hello world')  // Hello World
  * ```
  */
-export const capitalizeForWord = (str: string): string => {
-  if (!str) return ''
+export const capitalizeForWord = (str: string): string =>
+{
+  if (!str)
+    return ''
   return str.replace(UpperCaseRegExp, match => match.toUpperCase())
 }
 
@@ -313,7 +324,8 @@ export function cssGradientToECharts(cssGradient: string):
       global: boolean
       value: string
     }
-  | string {
+  | string
+{
   // 判断是线性渐变还是径向渐变
   const isLinear = cssGradient.startsWith('linear-gradient')
   const isRadial = cssGradient.startsWith('radial-gradient')
@@ -324,7 +336,8 @@ export function cssGradientToECharts(cssGradient: string):
   const colorStops: { offset: number; color: string }[] = []
 
   // 提取所有颜色和它们的百分比位置
-  while ((match = regex.exec(cssGradient)) !== null) {
+  while ((match = regex.exec(cssGradient)) !== null)
+  {
     const [r, g, b, a = '1', position] = match.slice(1)
     colorStops.push({
       offset: parseInt(position) / 100, // 将百分比转换为 0-1 范围
@@ -332,7 +345,8 @@ export function cssGradientToECharts(cssGradient: string):
     })
   }
 
-  if (isLinear) {
+  if (isLinear)
+  {
     // 解析线性渐变的方向
     const angleMatch = /linear-gradient\(([\d.]+)deg/.exec(cssGradient)
     const angle = angleMatch ? parseFloat(angleMatch[1]) : 0
@@ -348,7 +362,9 @@ export function cssGradientToECharts(cssGradient: string):
       global: false,
       value: cssGradient
     }
-  } else if (isRadial) {
+  }
+  else if (isRadial)
+  {
     // 返回 ECharts 的 radialGradient 配置
     return {
       type: 'radial',
@@ -359,7 +375,9 @@ export function cssGradientToECharts(cssGradient: string):
       global: false,
       value: cssGradient
     }
-  } else {
+  }
+  else
+  {
     // 如果不支持，返回原始字符串
     return cssGradient
     // throw new Error('不支持的渐变类型，仅支持 linear-gradient 和 radial-gradient。');
@@ -389,10 +407,13 @@ export function setValue<T = any>(
   path: string | string[],
   val: any,
   splitter: string = '.'
-): [Record<string, T>, string] {
+): [Record<string, T>, string]
+{
   // 如果 path 是字符串且不包含分隔符，直接赋值
-  if (typeof path === 'string') {
-    if (path.indexOf(splitter) === -1) {
+  if (typeof path === 'string')
+  {
+    if (path.indexOf(splitter) === -1)
+    {
       obj[path] = val
       return [obj, path]
     }
@@ -404,7 +425,8 @@ export function setValue<T = any>(
   const length = path.length // 路径长度
 
   // 遍历路径，确保路径中的对象存在
-  for (let i = 0; i < length - 1; i++) {
+  for (let i = 0; i < length - 1; i++)
+  {
     const p = path[i]
     // 如果路径中的对象不存在，则创建新对象
     active = active[p] = active[p] || {}
@@ -438,7 +460,8 @@ export function setValue<T = any>(
  * getValue(obj, 'a.b.c.d') // undefined
  * ```
  */
-export function getValue<T = any>(obj: Record<string, any>, path: string | string[], splitter: string = '.'): T {
+export function getValue<T = any>(obj: Record<string, any>, path: string | string[], splitter: string = '.'): T
+{
   if (typeof path === 'string') path = path.split(splitter)
 
   return path.reduce((o, k) => (o || {})[k], obj) as T
@@ -475,23 +498,28 @@ export function watchFn(
     timeout: number
     timeoutFn: () => void
   }> = {}
-): () => void {
+): () => void
+{
   const { delay = 100, limit = 1, timeout = 0, timeoutFn } = options
 
   let count = 0
   const startTime = Date.now()
-  const interval = setInterval(async () => {
-    if (timeout && Date.now() - startTime > timeout) {
+  const interval = setInterval(async() =>
+  {
+    if (timeout && Date.now() - startTime > timeout)
+    {
       timeoutFn && typeof timeoutFn === 'function' && timeoutFn()
       clearInterval(interval)
       return
     }
-    if (await fn()) {
+    if (await fn())
+    {
       await callback()
       if (++count >= limit) clearInterval(interval)
-    } else {
-      count = 0
     }
+    else
+      count = 0
+    
   }, delay) as any
 
   return () => clearInterval(interval)
@@ -509,8 +537,10 @@ export function watchFn(
  * const result = runFn(() => 'hello', null) // hello
  * ```
  */
-export const runFn = <T = any>(fn: () => T, ctx: any): T => {
-  if (ctx) return fn.call(ctx)
+export const runFn = <T = any>(fn: () => T, ctx: any): T =>
+{
+  if (ctx)
+    return fn.call(ctx)
   return fn()
 }
 
@@ -530,10 +560,14 @@ export const runFn = <T = any>(fn: () => T, ctx: any): T => {
  *  // {a: 10, b: function() {}, c: 'jhahah', d: null, e: undefined, f: [1, 2, 3, 4]}
  * ```
  */
-export const parseStrWithType = <T = any>(str: string): T | string => {
-  try {
+export const parseStrWithType = <T = any>(str: string): T | string =>
+{
+  try
+  {
     return new Function(`return ${str}`)()
-  } catch (e) {
+  }
+  catch (e)
+  {
     return str as string
   }
 }
@@ -560,7 +594,8 @@ export const parseStrWithType = <T = any>(str: string): T | string => {
  * restoreValue<number[]>('[1,2,3]') // [1,2,3]
  * ```
  */
-export function restoreValue<T = any>(str: string): T {
+export function restoreValue<T = any>(str: string): T
+{
   if (typeof str !== 'string') return str
   str = str.trim()
 
@@ -591,18 +626,24 @@ export function restoreValue<T = any>(str: string): T {
  * // {a: 10, b: function() {}, c: Symbol(), d: undefined}
  * ```
  */
-export function parseStringify<T = any>(str: string): T {
-  try {
-    return JSON.parse(str, (key, value) => {
+export function parseStringify<T = any>(str: string): T
+{
+  try
+  {
+    return JSON.parse(str, (key, value) =>
+    {
       if (startsWith(value, 'function-')) return new Function(`return ${value.slice(9)}`)()
-      if (startsWith(value, 'symbol-')) {
+      if (startsWith(value, 'symbol-'))
+      {
         const match = value.slice(7).match(SymbolRegExp)
         return match ? Symbol(match[1]) : value
       }
       if (startsWith(value, 'undef-')) return undefined
       return restoreValue(value)
     })
-  } catch (error) {
+  }
+  catch (error)
+  {
     return str as T
   }
 }
@@ -622,8 +663,10 @@ export function parseStringify<T = any>(str: string): T {
  * // '{"a":10,"b":"function() {}","c":"symbol()","d":"undefined"}'
  * ```
  */
-export function toStringify<T = any>(obj: T): string {
-  return JSON.stringify(obj, (key, value) => {
+export function toStringify<T = any>(obj: T): string
+{
+  return JSON.stringify(obj, (key, value) =>
+  {
     if (typeof value === 'function') return `function-${value.toString()}`
     if (typeof value === 'symbol') return `symbol-${value.toString()}`
     if (value === undefined) return 'undef-'
@@ -651,7 +694,8 @@ export function toStringify<T = any>(obj: T): string {
  * const result3 = expandCamelCase(str3, '-'); // 'hello-world-expand-camel-case'
  * ```
  */
-export function expandCamelCase(str: string, sep: string = ' '): string {
+export function expandCamelCase(str: string, sep: string = ' '): string
+{
   return str
     .replace(CamelCaseRegExp, sep + '$1')
     .trim()
@@ -676,7 +720,8 @@ export function expandCamelCase(str: string, sep: string = ' '): string {
  * const result2 = underlineToCamelCase(str2); // 'helloWorldUnderlineToCamelCase'
  * ```
  */
-export const underlineToCamelCase = (str: string): string => {
+export const underlineToCamelCase = (str: string): string =>
+{
   return str.replace(UnderlineToCamelCaseRegExp, (_, letter: string) => letter.toUpperCase())
 }
 
@@ -697,7 +742,8 @@ export const underlineToCamelCase = (str: string): string => {
  * const result2 = toFixed(num2, 4); // 10.1234
  * ```
  */
-export const toFixed = (num: number, digits: number = 2): number => {
+export const toFixed = (num: number, digits: number = 2): number =>
+{
   const strNum = num.toString()
   const index = strNum.indexOf('.')
   if (index === -1) return num
@@ -731,8 +777,10 @@ export const toFixed = (num: number, digits: number = 2): number => {
  * const result4 = fillTemplate(template4, data4); // 'Hello, Yuluo! You have 5 new messages.'
  * ```
  */
-export const fillTemplate = (template: string, data: Record<string, any> | any[]): string => {
-  return template.replace(PlaceholderRegExp, (_, key: string) => {
+export const fillTemplate = (template: string, data: Record<string, any> | any[]): string =>
+{
+  return template.replace(PlaceholderRegExp, (_, key: string) =>
+  {
     const index = parseInt(key, 10)
     if (!isNaN(index)) return (data as any[])[index] as string
     return (data as Record<string, any>)[key] as string
@@ -769,7 +817,8 @@ export function pxToRem<T = string | number>(
     isNumber: boolean
     rootFontSize: number
   }> = {}
-): T {
+): T
+{
   const {
     isReverse = false,
     isNumber = false,
@@ -800,8 +849,10 @@ export function pxToRem<T = string | number>(
  * const result2 = addCustomSeparator(str2, 3, '-') // '123-456-789-0'
  * ```
  */
-export const addCustomSeparator = (str: string, count: number, separator = '\n') => {
-  return str.split('').reduce((result, char, index) => {
+export const addCustomSeparator = (str: string, count: number, separator = '\n') =>
+{
+  return str.split('').reduce((result, char, index) =>
+  {
     if ((index + 1) % count === 0 && index < str.length - 1) return result + char + separator
     return result + char
   }, '')
@@ -858,21 +909,25 @@ interface ChainOptions {
 export const chain = <T extends readonly StepHandler<any, any>[]>(
   steps: T,
   opts: ChainOptions = {}
-): StepOutputs<T> => {
+): StepOutputs<T> =>
+{
   const { timeout, isComplete = true } = opts
 
   const results: unknown[] = Array(steps.length).fill(undefined)
   let hasError = false
 
-  steps.reduce<Promise<void>>(async (prevPromise, step, index) => {
+  steps.reduce<Promise<void>>(async(prevPromise, step, index) =>
+  {
     await prevPromise
     if (hasError && !isComplete) return
 
     // eslint-disable-next-line no-async-promise-executor
-    return new Promise<void>(async resolve => {
+    return new Promise<void>(async resolve =>
+    {
       let timer: number | null = null
 
-      const done = (result?: unknown) => {
+      const done = (result?: unknown) =>
+      {
         timer && clearTimeout(timer)
         results[index] = result
 
@@ -881,12 +936,15 @@ export const chain = <T extends readonly StepHandler<any, any>[]>(
         resolve()
       }
 
-      try {
+      try
+      {
         if (timeout) timer = setTimeout(() => done(new Error(`chain: step ${index} timeout`)), timeout)
 
         const input = index > 0 ? results[index - 1] : null
         await step(input, done)
-      } catch (err) {
+      }
+      catch (err)
+      {
         done(err instanceof Error ? err : new Error(String(err)))
       }
     })
