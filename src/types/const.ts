@@ -29,3 +29,14 @@ export const CSocial = {
   YOUTUBE: 'youtube',
   TIKTOK: 'tiktok'
 } as const
+
+export const CArticleListType = {
+  BASE: 'base',
+  WATERFALL: 'waterfall',
+  CARD: 'card'
+} as const
+
+export const CLanguage = {
+  ZH: 'zh',
+  EN: 'en'
+} as const

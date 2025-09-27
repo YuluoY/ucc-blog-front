@@ -11,7 +11,16 @@ const ReadView = () => import('@/views/ReadView.vue')
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    redirect: '/home'
+    redirect: '/home',
+    meta: {
+      title: '首页',
+      isRoute: true,
+      index: 1,
+      isHero: true,
+      isHidden: true,
+      isLeftSide: true,
+      isRightSide: true
+    }
   },
   {
     path: '/home',
@@ -20,7 +29,10 @@ const routes: RouteRecordRaw[] = [
     meta: {
       title: '首页',
       isRoute: true,
-      index: 1
+      index: 1,
+      isHero: true,
+      isLeftSide: true,
+      isRightSide: true
     }
   },
   {
@@ -40,7 +52,9 @@ const routes: RouteRecordRaw[] = [
     meta: {
       title: '归档',
       isRoute: true,
-      index: 2
+      index: 2,
+      isLeftSide: true,
+      isRightSide: true
     }
   },
   {

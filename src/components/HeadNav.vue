@@ -32,20 +32,21 @@
 import { UMenu, UMenuItem, USubMenu } from '@/components/Menu'
 import { useRouter, type RouteRecordRaw } from 'vue-router'
 import type { ULayout } from 'ucc-ui'
+import { useHeaderStore } from '@/stores/header'
+import { useAppStore } from '@/stores/app'
 defineOptions({
   name: 'HeadNav'
 })
 
-const router = useRouter()
-const routes = computed(() =>
-  $u.routes
-    .filter((v: RouteRecordRaw) => v.name && !v.meta?.isHidden)
-    .toSorted((a, b) => a.meta?.index! - b.meta?.index!)
-)
+const headerStore = useHeaderStore()
+const appStore = useAppStore()
 
-const logo = computed(() => $u.logo)
-const name = computed(() => $u.name)
-const navLeftWidth = computed(() => $u.navLeftWidth)
+const router = useRouter()
+const routes = computed(() => appStore.routes?.filter((v: RouteRecordRaw) => v.name && !v.meta?.isHidden))
+
+const logo = computed(() => headerStore.logo)
+const name = computed(() => headerStore.name)
+const navLeftWidth = computed(() => headerStore.leftWidth)
 
 // 暴露 DOM 元素
 const headNavElement = ref<InstanceType<typeof ULayout>>()

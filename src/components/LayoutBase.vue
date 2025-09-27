@@ -1,21 +1,30 @@
 <template>
   <u-layout class="layout-base">
-    <u-region class="layout-base__top" region="top" :style="topStyles">
+    <u-region
+      class="layout-base__top"
+      region="top"
+      :style="{
+        height: route.meta.isHero ? '100vh' : 'auto',
+      }"
+    >
       <HeadNav class="layout-base__nav" ref="headNavRef"></HeadNav>
       <HomeHero
-        v-show="isHomePage"
+        v-show="route?.meta?.isHero"
         class="layout-base__hero"
-        :title="heroTitle"
-        :desc="heroDesc"
-        :top="heroTop"
+        :title="heroStore.title"
+        :desc="heroStore.desc"
         :gap="heroContentGap"
         :title-style="titleStyle"
         :desc-style="descStyle"
       />
     </u-region>
-    <u-region region="center" class="layout-base__center" :style="{ marginTop: isHomePage ? '0' : topNavHeight }">
+    <u-region
+      region="center"
+      class="layout-base__center"
+      :style="{ marginTop: route?.meta?.isHero ? '0' : topNavHeight }"
+    >
       <u-layout>
-        <u-region region="left" class="layout-center__left">
+        <u-region region="left" class="layout-center__left" v-show="route.meta.isLeftSide">
           <SideLeft></SideLeft>
         </u-region>
         <u-region region="center" class="layout-center__center">
@@ -23,7 +32,7 @@
             <slot></slot>
           </Suspense>
         </u-region>
-        <u-region region="right" class="layout-center__right">
+        <u-region region="right" class="layout-center__right" v-show="route.meta.isRightSide">
           <SideRight></SideRight>
         </u-region>
       </u-layout>
@@ -35,39 +44,41 @@
 </template>
 
 <script setup lang="ts">
-import HeadNav from '@/components/HeadNav.vue'
-import BottomInfo from '@/components/BottomInfo.vue'
 import { pxToRem } from 'ucc-utils'
 import { URegion } from 'ucc-ui'
+import HeadNav from '@/components/HeadNav.vue'
+import BottomInfo from '@/components/BottomInfo.vue'
 import HomeHero from '@/components/HomeHero.vue'
 import SideLeft from '@/components/SideLeft/index.vue'
 import SideRight from '@/components/SideRight.vue'
+import { useHeaderStore } from '@/stores/header'
+import { useFooterStore } from '@/stores/footer'
+import { useHeroStore } from '@/stores/hero'
+import { useTransStyle } from '@/composables/useTransStyle'
 
 defineOptions({
-  name: 'LayoutBase'
+  name: 'LayoutBase',
 })
 
-const $u = window.$u
 const route = useRoute()
-
-const heroDesc = computed(() => $u.heroDesc)
-const heroTitle = computed(() => $u.heroTitle)
-const heroTop = computed<string>(() => pxToRem($u.heroTop))
-const titleStyle = computed(() => $u.heroTitleStyle)
-const descStyle = computed(() => $u.heroDescStyle)
-const heroContentGap = computed<string>(() => pxToRem($u.heroContentGap))
+const headerStore = useHeaderStore()
+const footerStore = useFooterStore()
+const heroStore = useHeroStore()
 
 const headNavRef = ref<InstanceType<typeof HeadNav>>()
 
-const topNavHeight = computed<string>(() => ($u.navHeight ? pxToRem($u.navHeight) : 'auto'))
+const topNavHeight = computed<string>(() => headerStore.height ? pxToRem(headerStore.height) : 'auto')
+const bottomInfoHeight = computed<string>(() => pxToRem(footerStore.height))
 
-const bottomInfoHeight = computed<string>(() => pxToRem($u.footerHeight))
+const heroContentGap = computed(() => pxToRem(heroStore.gap))
 
-const isHomePage = computed(() => route.path === '/' || route.path === '/home')
-const topStyles = computed(() => ({ height: isHomePage.value ? '100vh' : 'auto' }))
+const titleStyle = computed(() => useTransStyle(heroStore.titleStyles))
+const descStyle = computed(() => useTransStyle(heroStore.descStyles))
 
-onMounted(() => {
-  if (headNavRef.value?.headNavElement?.$el) $uFn.setNavHeight(headNavRef.value.headNavElement.$el.clientHeight)
+onMounted(() =>
+{
+  if (headNavRef.value?.headNavElement?.$el)
+    headerStore.setHeight(headNavRef.value.headNavElement.$el.clientHeight)
 })
 </script>
 

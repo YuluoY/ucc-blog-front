@@ -11,6 +11,8 @@
 </template>
 
 <script setup lang="ts">
+import { pxToRem } from '@/utils'
+import { isString } from 'lodash-es'
 import type { CSSProperties } from 'vue'
 
 defineOptions({
@@ -22,8 +24,7 @@ const props = withDefaults(
     title?: string
     desc?: string
     img?: string
-    top?: string
-    gap?: string
+    gap?: string | number
     titleStyle?: CSSProperties
     descStyle?: CSSProperties
   }>(),
@@ -33,6 +34,9 @@ const props = withDefaults(
     img: new URL('@/assets/images/8.jpeg', import.meta.url).href
   }
 )
+
+const gap = computed(() => isString(props.gap) ? props.gap : pxToRem(props.gap as number))
+
 </script>
 
 <style scoped lang="scss">

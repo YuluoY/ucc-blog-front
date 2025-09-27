@@ -64,7 +64,8 @@ export interface URootFontSizeReturn {
  * })
  * ```
  */
-export default function useRootFontSize(options: URootFontSizeOptions): URootFontSizeReturn {
+export default function useRootFontSize(options: URootFontSizeOptions): URootFontSizeReturn
+{
   const {
     debounceOpt = {} as DebounceSettings,
     immediate = false,
@@ -76,12 +77,13 @@ export default function useRootFontSize(options: URootFontSizeOptions): URootFon
   } = options
 
   let rootFontSizeValue = rootFontSize
-  const ratio = rootFontSizeValue / window.innerWidth
-  console.log(ratio, window.innerWidth * ratio)
+  // const ratio = rootFontSizeValue / window.innerWidth
+  // console.log(ratio, window.innerWidth * ratio)
   /**
    * 刷新根字体大小
    */
-  const refreshRootFontSize = (): void => {
+  const refreshRootFontSize = (): void =>
+  {
     isFunction(beforeRefreshCallback) && beforeRefreshCallback(rootFontSizeValue)
     document.documentElement.style.fontSize = `${(window.innerWidth * (rootFontSizeValue / window.innerWidth)) / window.devicePixelRatio}px`
     isFunction(afterRefreshCallback) && afterRefreshCallback(rootFontSizeValue)
@@ -95,7 +97,8 @@ export default function useRootFontSize(options: URootFontSizeOptions): URootFon
   /**
    * 手动设置根字体大小
    */
-  const setRootFontSize = (rootFontSize: number): void => {
+  const setRootFontSize = (rootFontSize: number): void =>
+  {
     rootFontSizeValue = rootFontSize
     refreshRootFontSize()
   }
@@ -108,7 +111,8 @@ export default function useRootFontSize(options: URootFontSizeOptions): URootFon
   /**
    * 销毁reszie
    */
-  const destory = isResize ? () => window.removeEventListener('resize', refreshRootFontSizeDebounce) : () => {}
+  const destory = isResize ? () => window.removeEventListener('resize', refreshRootFontSizeDebounce) : () =>
+  {}
 
   /**
    * 自动初始化执行

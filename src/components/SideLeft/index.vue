@@ -37,12 +37,13 @@ import api from '@/api'
 import { CTables } from '@/types/const'
 import { faker } from '@faker-js/faker'
 import SideLeftItem1 from './SideLeftItem1.vue'
+import { useHeaderStore } from '@/stores/header'
 
 defineOptions({
   name: 'SideLeft'
 })
-
-const logo = computed(() => $u.logo)
+const headerStore = useHeaderStore()
+const logo = computed(() => headerStore.logo)
 const apis = api(CTables.ARTICLE)
 
 const articleList = apis.getArticleList()
