@@ -2,8 +2,8 @@
  * 拖拽选中效果
  */
 
-const useDragSelect = () => {
+export const useDragSelect = () =>
+{
   return {}
 }
 
-export default useDragSelect

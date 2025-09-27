@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { faker } from '@faker-js/faker'
-import { useState } from '@/composables/useState'
+import { useState } from 'ucc-utils'
 
 export const useHeaderStore = defineStore('header', () =>
 {

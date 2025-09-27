@@ -133,7 +133,7 @@ const WATERFALL_ITEM_CLASS = 'waterfall-item'
  * const { Waterfall, isLoading, startIndex, endIndex, rowIndex, colsHeight, colMaxHeight, waterfallItemWidth, waterfallImages, waterfallItems } = useWaterfall(data, options)
  * ```
  */
-export default function useWaterfall<
+export const useWaterfall = <
   T extends {
     [key: string]: any
     img: string
@@ -141,7 +141,8 @@ export default function useWaterfall<
     desc: string
     id: any
   }[]
->(data: T, options: UseWaterfallOptions): UseWaterfallReturn {
+>(data: T, options: UseWaterfallOptions): UseWaterfallReturn =>
+{
   const {
     column,
     gap = 0,
@@ -175,7 +176,8 @@ export default function useWaterfall<
 
   const Waterfall = defineComponent({
     name: capitalize(WATERFALL_CLASS),
-    setup(props: { tag?: string }, { slots }) {
+    setup(props: { tag?: string }, { slots })
+    {
       return () =>
         h(
           props.tag || 'div',
@@ -197,14 +199,16 @@ export default function useWaterfall<
   })
 
   // 行索引监听
-  const rowIndexWatcher = watch(rowIndex, async () => {
+  const rowIndexWatcher = watch(rowIndex, async() =>
+  {
     await nextTick()
 
     // 超出数据长度
     if (rowIndex.value > Math.ceil(data.length / column)) return
 
     // 懒加载
-    if (isLazy) {
+    if (isLazy)
+    {
       startIndex.value = rowIndex.value * column
       endIndex.value = startIndex.value + column
     }
@@ -212,23 +216,27 @@ export default function useWaterfall<
     await nextTick()
 
     // 渲染
-    render().then(_ => {
+    render().then(_ =>
+    {
       isLoading.value = false
     })
   })
 
   // 卸载前
-  onBeforeUnmount(() => {
+  onBeforeUnmount(() =>
+  {
     rowIndexWatcher()
   })
 
-  onMounted(async () => {
+  onMounted(async() =>
+  {
     // 监听瀑布流
     if (isLazy) monitorWaterfall()
     // 设置行索引
     else rowIndex.value = Math.ceil(data.length / column)
     // 设置宽度
-    if (waterfall.value) {
+    if (waterfall.value)
+    {
       const scrollbarWidth = getScrollbarWidth(waterfall.value)
       setStyles(waterfall.value, {
         width: `${onPixelTrans(waterfall.value.clientWidth - margin * 2 - scrollbarWidth)}${unit}`,
@@ -245,17 +253,20 @@ export default function useWaterfall<
    * 渲染瀑布流
    * @returns
    */
-  async function render(trigger = false) {
+  async function render(trigger = false)
+  {
     if (isLoading.value) return
     isLoading.value = true
     await update()
     await nextTick()
-    if (!trigger) {
+    if (!trigger)
+    {
       await loadImages()
       await nextTick()
     }
     const items = waterfallItems.value.slice(startIndex.value, endIndex.value)
-    items.forEach((item, index) => {
+    items.forEach((item, index) =>
+    {
       requestAnimationFrame(() => renderItem(item, colMinHeightIndex.value))
     })
   }
@@ -264,7 +275,8 @@ export default function useWaterfall<
    * 更新瀑布流
    * @returns
    */
-  async function update() {
+  async function update()
+  {
     const items = Array.from(waterfall.value?.querySelectorAll?.(`.${WATERFALL_ITEM_CLASS}`) || []) as HTMLElement[]
     if (!items.length) return
     waterfallItems.value = items
@@ -276,7 +288,8 @@ export default function useWaterfall<
    * @param item 瀑布流元素
    * @param colIndex 列索引
    */
-  async function renderItem(item: HTMLElement, colIndex: number) {
+  async function renderItem(item: HTMLElement, colIndex: number)
+  {
     const colHeight = colsHeight.value[colIndex]
     setStyles(item, {
       width: `${onPixelTrans(waterfallItemWidth.value)}${unit}`,
@@ -300,21 +313,24 @@ export default function useWaterfall<
    * 预加载图片 - 等待图片加载完成
    * @returns 图片元素的宽度和高度
    */
-  async function loadImages() {
+  async function loadImages()
+  {
     // 获取需要预加载的图片
     const images = waterfallImages.value.slice(startIndex.value, endIndex.value)
     // 返回所有结果，无论成功失败
     return Promise.allSettled(
       images.map(
         (img, index) =>
-          new Promise<{ width: number; height: number; img: HTMLImageElement; colIndex: number }>(resolve => {
+          new Promise<{ width: number; height: number; img: HTMLImageElement; colIndex: number }>(resolve =>
+          {
             // 缓存列索引
             const colIndex = index
             // 设置默认图片样式
             setStyles(img, WaterfallImageStyle)
 
             // 处理加载成功
-            img.onload = _ => {
+            img.onload = _ =>
+            {
               resolve({
                 width: img.clientWidth,
                 height: img.clientHeight,
@@ -324,7 +340,8 @@ export default function useWaterfall<
             }
 
             // 处理加载失败
-            img.onerror = _ => {
+            img.onerror = _ =>
+            {
               console.warn(`图片加载失败: ${img.src}`)
               // 设置默认使用占位图
               const item = images[colIndex]
@@ -332,7 +349,8 @@ export default function useWaterfall<
                 item.src = placeholderImg[Math.floor(Math.random() * placeholderImg.length)]
               else item.src = placeholderImg || ''
 
-              img.onload = _ => {
+              img.onload = _ =>
+              {
                 resolve({
                   width: img.clientWidth,
                   height: img.clientHeight,
@@ -340,7 +358,8 @@ export default function useWaterfall<
                   colIndex
                 })
               }
-              img.onerror = _ => {
+              img.onerror = _ =>
+              {
                 console.warn(`图片加载失败: ${img.src}`)
                 resolve({
                   width: 0,
@@ -352,12 +371,17 @@ export default function useWaterfall<
             }
           })
       )
-    ).then(results => {
+    ).then(results =>
+    {
       // 返回所有结果，无论成功失败
-      return results.map(result => {
-        if (result.status === 'fulfilled') {
+      return results.map(result =>
+      {
+        if (result.status === 'fulfilled')
+        
           return result.value
-        } else {
+        
+        else
+        {
           // 处理失败情况，返回默认值
           console.error('图片加载失败:', result.reason)
           return {
@@ -374,19 +398,23 @@ export default function useWaterfall<
   /**
    * 监听瀑布流
    */
-  function monitorWaterfall() {
+  function monitorWaterfall()
+  {
     const monitOptions: UseMonitDomOptions = {
-      onIntersect: (entry, value) => {
+      onIntersect: (entry, value) =>
+      {
         const eBtn = entry.boundingClientRect.bottom
         const vH = window.innerHeight
         const vaild = loadCondition?.(entry, value)
-        if (eBtn < vH && !isLoading.value && (vaild || !loadCondition)) {
+        if (eBtn < vH && !isLoading.value && (vaild || !loadCondition))
+        {
           isAuto && rowIndex.value++
           onLoading?.()
         }
       }
     }
-    if (isLazy) {
+    if (isLazy)
+    {
       monitOptions.isKeep = true
       monitOptions.isImmediate = true
     }
@@ -399,8 +427,10 @@ export default function useWaterfall<
   /**
    * 监听窗口大小变化
    */
-  function resizeWaterfall() {
-    const resizeHandler = () => {
+  function resizeWaterfall()
+  {
+    const resizeHandler = () =>
+    {
       console.log('resize')
       // if (!waterfall.value || !_data.value.length) return
       // const scrollbarWidth = getScrollbarWidth(waterfall.value)
@@ -435,7 +465,8 @@ export default function useWaterfall<
  * @param item 元素
  * @param styles 样式
  */
-function setStyles(item: HTMLElement | HTMLElement[], styles: CSSProperties) {
+function setStyles(item: HTMLElement | HTMLElement[], styles: CSSProperties)
+{
   if (Array.isArray(item)) item.forEach(i => setStyles(i, styles))
   else Object.assign(item.style, styles)
 }
@@ -445,7 +476,8 @@ function setStyles(item: HTMLElement | HTMLElement[], styles: CSSProperties) {
  * @param el 元素
  * @returns 滚动条宽度
  */
-const getScrollbarWidth = (el: HTMLElement) => {
+const getScrollbarWidth = (el: HTMLElement) =>
+{
   // 创建一个带滚动条的div
   const outer = document.createElement('div')
   outer.style.visibility = 'hidden'

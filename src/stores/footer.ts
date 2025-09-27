@@ -1,4 +1,4 @@
-import { useState } from '@/composables/useState'
+import { useState } from 'ucc-utils'
 import { defineStore } from 'pinia'
 
 export const useFooterStore = defineStore('footer', () =>

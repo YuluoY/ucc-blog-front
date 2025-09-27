@@ -15,7 +15,8 @@ const _default = {
  * useNextId({ isOrderly: false }) // '0x1g4k'
  * ```
  */
-export default function useNextId(opts: { isOrderly?: boolean } = {}): string {
+export const useNextId = (opts: { isOrderly?: boolean } = {}): string =>
+{
   const { isOrderly = true } = opts
   return isOrderly ? ++_default.count + '' : Math.random().toString(36).substr(2, 9)
 }

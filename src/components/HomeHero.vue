@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { pxToRem } from '@/utils'
+import { pxToRem } from 'ucc-utils'
 import { isString } from 'lodash-es'
 import type { CSSProperties } from 'vue'
 

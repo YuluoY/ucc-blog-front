@@ -1,4 +1,4 @@
-import { pxToRem } from '@/utils'
+import { pxToRem } from 'ucc-utils'
 import { isNumber } from 'lodash-es'
 import type { CSSProperties } from 'vue'
 

@@ -64,7 +64,7 @@ export interface URootFontSizeReturn {
  * })
  * ```
  */
-export default function useRootFontSize(options: URootFontSizeOptions): URootFontSizeReturn
+export const useRootFontSize = (options: URootFontSizeOptions): URootFontSizeReturn =>
 {
   const {
     debounceOpt = {} as DebounceSettings,

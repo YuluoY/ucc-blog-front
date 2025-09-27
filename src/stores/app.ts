@@ -1,5 +1,5 @@
 import { useRoutes } from '@/composables/useRoutes'
-import { useState } from '@/composables/useState'
+import { useState } from 'ucc-utils'
 import type { ArticleListType, Language, Theme } from '@/types'
 import { CArticleListType } from '@/types/const'
 import { defineStore } from 'pinia'
