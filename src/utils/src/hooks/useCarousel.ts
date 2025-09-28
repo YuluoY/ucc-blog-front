@@ -1,3 +1,4 @@
 import { ref } from 'vue'
 
-export function useCarousel() {}
+export function useCarousel()
+{}

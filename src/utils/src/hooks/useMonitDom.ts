@@ -28,8 +28,10 @@ export default function useMonitDom(
   observe: () => void
   disconnect: () => void
   takeRecords: () => IntersectionObserverEntry[]
-} | null {
-  if (!dom) {
+} | null
+{
+  if (!dom)
+  {
     console.error('dom is required')
     return null
   }
@@ -44,8 +46,10 @@ export default function useMonitDom(
     omit(options, ['root', 'rootMargin', 'threshold']) as IntersectionObserverInit
   )
 
-  function callback(entries: IntersectionObserverEntry[]) {
-    entries.forEach(entry => {
+  function callback(entries: IntersectionObserverEntry[])
+  {
+    entries.forEach(entry =>
+    {
       if (entry.isIntersecting) options.onIntersect?.(entry, entry.intersectionRatio)
     })
   }
@@ -54,8 +58,10 @@ export default function useMonitDom(
   if (options.isImmediate) observer.observe(dom)
 
   // 保持观察
-  if (options.isKeep) {
-    debouncedObserve = debounce(() => {
+  if (options.isKeep)
+  {
+    debouncedObserve = debounce(() =>
+    {
       // 先停止之前的观察
       unobserve()
       // 重新开始观察
@@ -70,21 +76,24 @@ export default function useMonitDom(
   /**
    * 停止观察
    */
-  function unobserve() {
+  function unobserve()
+  {
     observer.unobserve(dom)
   }
 
   /**
    * 开始观察
    */
-  function observe() {
+  function observe()
+  {
     observer.observe(dom)
   }
 
   /**
    * 断开观察
    */
-  function disconnect() {
+  function disconnect()
+  {
     observer.disconnect()
     window.removeEventListener('scroll', debouncedObserve)
   }
@@ -92,11 +101,13 @@ export default function useMonitDom(
   /**
    * 获取观察记录
    */
-  function takeRecords() {
+  function takeRecords()
+  {
     return observer.takeRecords()
   }
 
-  onBeforeUnmount(() => {
+  onBeforeUnmount(() =>
+  {
     disconnect()
   })
 

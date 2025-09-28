@@ -1,28 +1,40 @@
-import { shallowRef, nextTick } from 'vue'
-import type { DeepReadonly, ShallowRef, UnwrapNestedRefs } from 'vue'
+import { shallowRef, toValue, shallowReadonly } from 'vue'
+import type { ShallowRef } from 'vue'
 
-type UseStateResult<T> = [ShallowRef<T>, (newState: T) => void]
-
+/**
+ * @author  Yuluo
+ * @link    https://github.com/YuluoY
+ * @date    2025-09-27
+ * @param target 初始值
+ * @param change 变化回调
+ * @returns 状态和设置状态函数
+ * @example
+ * ```ts
+ * const [state, setState] = useState('hello')
+ * setState('world')
+ * console.log(state.value) // 'world'
+ *
+ * const [state, setState] = useState(() => 'hello')
+ * setState(_ => 'world')
+ * ```
+ */
 export const useState = <T>(
   target: T,
   change?: (newState: T) => void
-): DeepReadonly<UnwrapNestedRefs<UseStateResult<T>>> =>
+): readonly [ShallowRef<T>, (newState: T) => void] =>
 {
-  const state = shallowRef<T>(target)
+  const state = shallowRef<T>(toValue(target))
   
-  const setState = (newState: T, callback?: (newState: T) => void) =>
+  const setState = <K extends T>(newState: K) =>
   {
+    newState = toValue(newState)
     if (Object.is(state.value, newState))
       return
     state.value = newState
-    nextTick(() =>
-    {
-      change?.(newState)
-      callback?.(newState)
-    })
+    change?.(newState)
   }
 
-  return readonly<UseStateResult<T>>([
+  return shallowReadonly([
     state,
     setState
   ])

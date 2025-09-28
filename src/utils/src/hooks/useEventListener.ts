@@ -34,15 +34,15 @@ type CleanupFn = () => void
  * const cleanup = useEventListener(ref, 'click', () => {
  *   console.log('clicked')
  * })
- * 
+ *
  * // 使用函数
  * const cleanup = useEventListener(() => document.querySelector('#app'), 'click', () => {
  *   console.log('clicked')
  * })
- * 
+ *
  *  * // 在需要时手动清理
  * cleanup()
- * 
+ *
  * ```
  */
 export default function useEventListener(
@@ -50,12 +50,14 @@ export default function useEventListener(
   event: keyof WindowEventMap,
   callback: EventListener,
   options: EventOptions = {}
-): CleanupFn {
+): CleanupFn
+{
   // 存储实际的DOM元素引用
   let element: EventTarget | null = null
 
   // 清理函数：移除事件监听
-  const cleanup: CleanupFn = () => {
+  const cleanup: CleanupFn = () =>
+  {
     if (element) element.removeEventListener(event, callback)
   }
 
@@ -66,8 +68,10 @@ export default function useEventListener(
   if (options.throttle) callback = throttle(callback, options.throttle)
 
   // 组件挂载时添加事件监听
-  onMounted(() => {
-    if (target) {
+  onMounted(() =>
+  {
+    if (target)
+    {
       // 如果target是函数则执行它获取DOM元素，否则直接使用
       element = isRef(target) ? target.value : isFunction(target) ? target() : target
       element.addEventListener(event, callback, options)
@@ -76,12 +80,14 @@ export default function useEventListener(
   })
 
   // 组件卸载时移除事件监听
-  onUnmounted(() => {
+  onUnmounted(() =>
+  {
     cleanup()
     // 如果使用了防抖或节流，需要取消待执行的函数
-    if (options.debounce || options.throttle) {
-      ;(callback as any).cancel?.()
-    }
+    if (options.debounce || options.throttle)
+    
+      (callback as any).cancel?.()
+    
   })
 
   // 返回清理函数，允许在需要时手动清理

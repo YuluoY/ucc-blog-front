@@ -1,5 +1,5 @@
 /* eslint-env node */
-require('@rushstack/eslint-patch/modern-module-resolution');
+require('@rushstack/eslint-patch/modern-module-resolution')
 
 module.exports = {
   root: true,
@@ -23,11 +23,13 @@ module.exports = {
     $uFn: 'writable',
   },
   rules: {
-    'no-': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    
     // cx工程自定义
     quotes: ['error', 'single', { allowTemplateLiterals: true }], // 优先单引号
     'generator-star-spacing': 'off', // 关闭-强制 generator 函数中 * 号周围有空格
-    'no-undef': 'warn', // 未声明的变量，除非它们在 /*global */ 注释中被提到
+    'no-undef': 'off', // 关闭 no-undef，因为 TypeScript 已经提供了类型检查
     'no-new': 'warn', // 没把new的对象赋值到变量
     'no-tabs': 'off', // 关闭-tab键
     'spaced-comment': 'warn', // 关闭-注释有一个空格
@@ -43,6 +45,7 @@ module.exports = {
     'keyword-spacing': ['error', { after: true }], // 关键字后面一个空格
     'no-multiple-empty-lines': [1, { max: 2 }], // 空行最多不能超过2行
     'space-before-function-paren': ['error', 'never'], // 函数的参数圆括号前面无空格
+    'arrow-parens': ['error', 'as-needed'], // 箭头函数参数只有一个时不需要括号
     curly: ['error', 'multi-or-nest'], // if等只包含一条语句省虐大括号
     'block-scoped-var': 'error', // 在块级作用域范围之内不能使用var
     'no-unneeded-ternary': 'off', // 关闭-禁止不必要的嵌套 var isYes = answer === 1 ? true : false;
@@ -54,8 +57,7 @@ module.exports = {
     'no-dupe-keys': ['error'], // 禁止对象字面量中出现重复的 key
     'no-duplicate-case': ['error'], // 禁止出现重复的 case 标签
     'no-empty': ['error', { allowEmptyCatch: true }], // 禁止出现空语句块
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
