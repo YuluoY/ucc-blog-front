@@ -57,11 +57,11 @@
 </template>
 
 <script setup lang="ts">
-import type { Article } from '@/types/models/article'
+import type { IArticle } from '@/types/models/article'
 
 const props = withDefaults(
   defineProps<{
-    data: Article[]
+    data: IArticle[]
   }>(),
   {
     data: () => []

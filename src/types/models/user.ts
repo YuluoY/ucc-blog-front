@@ -1,7 +1,6 @@
-import type { Social, UserRole } from '..'
+import type { IBaseFields, UserRole } from '..'
 
-export interface User {
-  id: number
+export interface IUser extends IBaseFields {
   username: string
   email: string
   namec: string
@@ -10,23 +9,25 @@ export interface User {
   role: UserRole
   location: string
   ip: string
-  website: {
-    url: string
-    title: string
-    desc: string
-    cover: string
-  }
-  socials: Array<{
-    type: Social
-    url: string
-  }>
-  params: Record<string, string>
+  website: IWebsite
+  socials: ISocial[]
   isActive: boolean
   isVerified: boolean
   token: string
-  failLoginCount: number
-  lockoutExpiresAt: Date | null
-  lastLoginAt: Date | null
-  createdAt: Date
-  updatedAt: Date
+  lastLoginAt: string
 }
+
+export interface IWebsite {
+  url: string
+  title: string
+  desc: string
+  cover: string
+}
+
+export interface ISocial {
+  type: string
+  logo: string
+  url: string
+}
+
+export interface IUserDto extends Omit<IUser, keyof IBaseFields> {}

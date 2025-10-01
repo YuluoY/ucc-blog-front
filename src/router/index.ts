@@ -14,7 +14,7 @@ const routes: RouteRecordRaw[] = [
     redirect: '/home',
     meta: {
       title: '首页',
-      isRoute: true,
+      isAffix: true,
       index: 1,
       isHero: true,
       isHidden: true,
@@ -28,7 +28,7 @@ const routes: RouteRecordRaw[] = [
     component: HomeView,
     meta: {
       title: '首页',
-      isRoute: true,
+      isAffix: true,
       index: 1,
       isHero: true,
       isLeftSide: true,
@@ -41,7 +41,7 @@ const routes: RouteRecordRaw[] = [
     component: AboutView,
     meta: {
       title: '关于',
-      isRoute: true,
+      isAffix: true,
       index: 3
     }
   },
@@ -51,7 +51,7 @@ const routes: RouteRecordRaw[] = [
     component: ArchiveView,
     meta: {
       title: '归档',
-      isRoute: true,
+      isAffix: true,
       index: 2,
       isLeftSide: true,
       isRightSide: true
@@ -63,7 +63,7 @@ const routes: RouteRecordRaw[] = [
     component: ReadView,
     meta: {
       title: '阅读',
-      isRoute: true,
+      isAffix: true,
       isHidden: true
     }
   },

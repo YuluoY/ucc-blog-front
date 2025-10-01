@@ -1,12 +1,13 @@
 import { defineStore } from 'pinia'
 import { faker } from '@faker-js/faker'
 import { useState } from 'ucc-utils'
+import { getRandomImage } from '@/mock/utils'
 
 export const useHeaderStore = defineStore('header', () =>
 {
   
   const [height, setHeight] = useState(0)
-  const [logo, setLogo] = useState(new URL('@/assets/images/11.jpg', import.meta.url).href)
+  const [logo, setLogo] = useState(getRandomImage())
   const [name, setName] = useState(faker.person.fullName())
   const [leftWidth, setLeftWidth] = useState(3)
 

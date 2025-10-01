@@ -1,25 +1,29 @@
-import type { ArticleStatus } from '..'
-import type { Category } from './category'
-import type { Tag } from './tag'
-import type { User } from './user'
+import type { ArticleStatus, IBaseFields } from '..'
+import type { ICategory } from './category'
+import type { ITag } from './tag'
+import type { IUser } from './user'
 
-export interface Article {
-  id: string
+export interface IArticle extends IBaseFields {
+  user: IUser
+  author: IUser[]
+  category: ICategory
+  tags: ITag[]
   title: string
+  content: string
   desc: string
   cover: string
   status: ArticleStatus
-  author: User[]
-  content: string
-  protect: string // 密码保护
-  tags: Tag[]
-  commentCount: number
-  category: Category[]
-  viewCount: number
-  likeCount: number
-  createdAt: string
-  updatedAt: string
-  publishedAt: string
   isPrivate: boolean
   isTop: boolean
+  protect: string
+  commentCount: number
+  likeCount: number
+  viewCount: number
+  publishedAt: string
+}
+
+export interface IArticleDto extends Omit<IArticle, keyof IBaseFields> {
+  userId: string
+  categoryId: string
+  tagIds: string[]
 }

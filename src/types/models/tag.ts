@@ -1,6 +1,14 @@
-export interface Tag {
-  id: string
+import type { IBaseFields } from '..'
+import type { IUser } from './user'
+
+
+export interface ITag extends IBaseFields {
   name: string
-  count: number
+  desc: string
+  user: IUser
   color: string
+}
+
+export interface ITagDto extends ITag {
+  userId: string
 }

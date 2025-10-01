@@ -13,6 +13,7 @@
         class="layout-base__hero"
         :title="heroStore.title"
         :desc="heroStore.desc"
+        :img="heroStore.img"
         :gap="heroContentGap"
         :title-style="titleStyle"
         :desc-style="descStyle"

@@ -5,6 +5,7 @@ export const CTheme = {
 } as const
 
 export const CTables = {
+  USER: 'user',
   ARTICLE: 'article'
 } as const
 
@@ -20,16 +21,6 @@ export const CUserRole = {
   GUEST: 'guest'
 } as const
 
-export const CSocial = {
-  GITHUB: 'github',
-  TWITTER: 'twitter',
-  FACEBOOK: 'facebook',
-  LINKEDIN: 'linkedin',
-  INSTAGRAM: 'instagram',
-  YOUTUBE: 'youtube',
-  TIKTOK: 'tiktok'
-} as const
-
 export const CArticleListType = {
   BASE: 'base',
   WATERFALL: 'waterfall',
@@ -39,4 +30,9 @@ export const CArticleListType = {
 export const CLanguage = {
   ZH: 'zh',
   EN: 'en'
+} as const
+
+export const CPermissionType = {
+  MENU: 'menu', // 菜单
+  BUTTON: 'button'
 } as const

@@ -8,9 +8,13 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     ArticleBase: typeof import('./components/ArticleListStyles/ArticleBase.vue')['default']
+    BaseInfoCard: typeof import('./components/SideLeft/BaseInfoCard.vue')['default']
     BottomInfo: typeof import('./components/BottomInfo.vue')['default']
     HeadNav: typeof import('./components/HeadNav.vue')['default']
     HomeHero: typeof import('./components/HomeHero.vue')['default']
+    LatestArticleCard: typeof import('./components/SideLeft/LatestArticleCard.vue')['default']
+    LatestArticleList: typeof import('./components/SideLeft/LatestArticleListCard.vue')['default']
+    LatestArticleListCard: typeof import('./components/SideLeft/LatestArticleListCard.vue')['default']
     LayoutBase: typeof import('./components/LayoutBase.vue')['default']
     Menu: typeof import('./components/Menu/src/Menu.vue')['default']
     MenuItem: typeof import('./components/Menu/src/MenuItem.vue')['default']

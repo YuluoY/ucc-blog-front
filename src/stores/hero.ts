@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { faker } from '@faker-js/faker'
 import { useState } from 'ucc-utils'
+import { getRandomImage } from '@/mock/utils'
 
 export const useHeroStore = defineStore('hero', () =>
 {
@@ -8,6 +9,7 @@ export const useHeroStore = defineStore('hero', () =>
   const [title, setTitle] = useState(faker.lorem.words(3))
   const [desc, setDesc] = useState(faker.lorem.paragraph())
   const [gap, setGap] = useState(20)
+  const [img, setImg] = useState(getRandomImage())
   const [titleStyles, setTitleStyles] = useState({
     fontSize: 50,
     fontWeight: 600,
@@ -25,6 +27,7 @@ export const useHeroStore = defineStore('hero', () =>
     title,
     desc,
     gap,
+    img,
     titleStyles,
     descStyles,
     
@@ -32,6 +35,7 @@ export const useHeroStore = defineStore('hero', () =>
     setTitle,
     setDesc,
     setGap,
+    setImg,
     setTitleStyles,
     setDescStyles
   }

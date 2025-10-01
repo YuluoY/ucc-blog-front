@@ -34,14 +34,15 @@ import type { Component } from 'vue'
 import api from '@/api'
 import { CTables } from '@/types/const'
 import { useAppStore } from '@/stores/app'
+import { useArticleStore } from '@/stores/model/article'
 defineOptions({
   name: 'HomeView'
 })
 const appStore = useAppStore()
+const articleStore = useArticleStore()
 
 const ArticleList = computed<Component>(() => ArticleListStyles[appStore.articleListType])
-const articleList = await api(CTables.ARTICLE).getArticleList()
-console.log(articleList)
+const articleList = computed(() => articleStore.articleList)
 </script>
 
 <style scoped lang="scss">

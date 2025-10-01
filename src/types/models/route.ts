@@ -1,12 +1,20 @@
-export interface Route {
-  path: string
+import type { IBaseFields } from '..'
+export interface IRoute extends IBaseFields {
+  title: string
   name: string
-  parent: Route | null
-  children: Route[]
-  meta: {
-    title: string
-    isRoute: boolean
-    isHidden: boolean
-    index: number
-  }
+  path: string
+  component: string
+  redirect: string
+  icon: string
+  isHidden: boolean
+  isKeepAlive: boolean
+  isAffix: boolean
+  isExact: boolean
+  isProtected: boolean
+  isHero: boolean
+  isLeftSide: boolean
+  isRightSide: boolean
+  pid: string
 }
+
+export interface IRouteDto extends Omit<IRoute, keyof IBaseFields> {}

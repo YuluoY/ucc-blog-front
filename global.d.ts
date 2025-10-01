@@ -19,9 +19,10 @@ declare global {
 declare module 'vue-router' {
   interface RouteMeta {
     index?: number      // 索引
+    icon?: string       // 图标
     title?: string      // 标题显示
     isHidden?: boolean  // 是否显示
-    isRoute?: boolean   // 是否是路由
+    isAffix?: boolean   // 是否是固定导航路由
     isHero?: boolean    // 是否显示hero封面
     isLeftSide?: boolean  // 左侧side
     isRightSide?: boolean // 右侧side

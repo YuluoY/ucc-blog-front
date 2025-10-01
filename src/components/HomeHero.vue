@@ -31,7 +31,7 @@ const props = withDefaults(
   {
     title: '欢迎来到我的博客',
     desc: '这是一个分享技术和生活的地方',
-    img: new URL('@/assets/images/8.jpeg', import.meta.url).href
+    img: new URL('/src/assets/images/8.jpg', import.meta.url).href
   }
 )
 

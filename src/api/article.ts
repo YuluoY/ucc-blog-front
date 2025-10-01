@@ -1,16 +1,18 @@
-import { fakeArticleList } from '@/mock'
-import type { Article } from '@/types/models/article'
+import type { IArticle } from '@/types/models/article'
 import type { ApiMethod } from './types'
+import { createArticle, toCopy } from '@/mock'
 
 export interface IArticleApis {
   [keyof: string]: ApiMethod
-  getArticleList: () => Promise<Article[]>
+  getArticleList: () => Promise<IArticle[]>
 }
 
 const apis: IArticleApis = {
   getArticleList()
   {
-    return Promise.resolve(fakeArticleList)
+    return Promise.resolve(
+      toCopy(createArticle, { min: 10, max: 20 })
+    )
   }
 }
 
