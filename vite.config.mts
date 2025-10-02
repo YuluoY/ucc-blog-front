@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import { fileURLToPath, URL } from 'node:url'
 
 import vue from '@vitejs/plugin-vue'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 import AutoImport from 'unplugin-auto-import/vite'
 import UnCompoent from 'unplugin-vue-components/vite'
 
@@ -22,6 +23,7 @@ export default defineConfig({
   assetsInclude: ['**/*.jpg', '**/*.jpeg', '**/*.png', '**/*.gif', '**/*.svg'],
   plugins: [
     vue(),
+    vueJsx(),
     AutoImport({
       imports: ['vue', 'vue-router'],
       dts: 'src/auto-import.d.ts',

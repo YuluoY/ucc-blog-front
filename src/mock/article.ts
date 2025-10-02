@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { getRandomImage, toCopy } from './utils'
+import { generateRandomMarkdown, getRandomImage, toCopy } from './utils'
 import { CArticleStatus } from '@/types/const'
 import { createTag } from './tag'
 import { createUser } from './user'
@@ -21,7 +21,7 @@ export const createArticle = (): IArticle =>
     status: faker.helpers.arrayElement(Object.values(CArticleStatus)),
     cover: getRandomImage(),
     author: [createUser()],
-    content: faker.lorem.paragraphs(100),
+    content: generateRandomMarkdown(10000, 5),
     protect: faker.helpers.arrayElement([faker.lorem.word(), '', '', '', '']),
     commentCount: faker.number.int({ min: 1, max: 100 }),
     user: createUser(),

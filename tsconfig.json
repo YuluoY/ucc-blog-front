@@ -4,6 +4,8 @@
     "target": "ESNext",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "baseUrl": ".",
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
     "paths": {
       "@/*": ["./src/*"],
       "components": ["./src/components/*"],
@@ -30,6 +32,7 @@
   ],
   // 不需要被编译的目录/文件
   "exclude": [
+    "**/*.test.ts",
     "node_modules",
     "dist",
     "**/*.spec.ts",

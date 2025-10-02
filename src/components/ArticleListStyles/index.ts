@@ -1,9 +1,13 @@
 import ArticleBase from './ArticleBase.vue'
 
-export default {
-  base: ArticleBase
-} as {
+export interface IArticleListStyles {
   base: typeof ArticleBase
-  waterfall: any
-  card: any
+  // waterfall: any
+  // card: any
 }
+
+const components: IArticleListStyles = {
+  base: ArticleBase
+}
+
+export default components

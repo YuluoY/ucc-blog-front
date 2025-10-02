@@ -15,6 +15,11 @@ export const useArticleStore = defineStore('article', () =>
     setArticleList(articleList)
   }
 
+  const findArticleById = (id: string) =>
+  {
+    return articleList.value.find(article => article.id === id)
+  }
+
   onBeforeMount(() =>
   {
     qryArticleList()
@@ -23,6 +28,7 @@ export const useArticleStore = defineStore('article', () =>
   return {
     articleList,
     setArticleList,
-    qryArticleList
+    qryArticleList,
+    findArticleById
   }
 })

@@ -46,7 +46,7 @@
                 <span>分享</span>
               </div>
               <div class="info-item">
-                <u-button>浏览</u-button>
+                <u-button @click="emit('jump', item.id)">浏览</u-button>
               </div>
             </div>
           </div>
@@ -67,6 +67,10 @@ const props = withDefaults(
     data: () => []
   }
 )
+
+const emit = defineEmits<{
+  (e: 'jump', id: string): void
+}>()
 </script>
 
 <style scoped lang="scss">

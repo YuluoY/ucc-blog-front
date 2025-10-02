@@ -1,11 +1,20 @@
 <template>
   <u-layout>
-    <u-region region="center"> read... </u-region>
+    <u-region region="center">
+      <component v-if="Preview" :is="Preview"></component>
+      <component v-if="Catalog" :is="Catalog"></component>
+    </u-region>
   </u-layout>
 </template>
 
-<style lang="ts" setup>
+<script lang="ts" setup>
+import { usePreviewMd } from '@/composables/usePreviewMd'
+
 defineOptions({
   name: 'ReadView'
 })
-</style>
+
+const route = useRoute()
+const { Preview, Catalog } = usePreviewMd({ articleId: route.params.id as string })
+
+</script>

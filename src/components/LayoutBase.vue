@@ -9,7 +9,7 @@
     >
       <HeadNav class="layout-base__nav" ref="headNavRef"></HeadNav>
       <HomeHero
-        v-show="route?.meta?.isHero"
+        v-show="route.meta?.isHero"
         class="layout-base__hero"
         :title="heroStore.title"
         :desc="heroStore.desc"
@@ -21,20 +21,20 @@
     </u-region>
     <u-region
       region="center"
-      class="layout-base__center"
-      :style="{ marginTop: route?.meta?.isHero ? '0' : topNavHeight }"
+      id="layout-base__center"
+      :style="{ marginTop: route.meta?.isHero ? '0' : topNavHeight }"
     >
       <u-layout>
-        <u-region region="left" class="layout-center__left" v-show="route.meta.isLeftSide">
-          <SideLeft></SideLeft>
+        <u-region region="left" id="layout-center__left">
+          <SideLeft v-show="route.meta?.isLeftSide"></SideLeft>
         </u-region>
-        <u-region region="center" class="layout-center__center">
+        <u-region region="center" id="layout-center__center">
           <Suspense>
             <slot></slot>
           </Suspense>
         </u-region>
-        <u-region region="right" class="layout-center__right" v-show="route.meta.isRightSide">
-          <SideRight></SideRight>
+        <u-region region="right" id="layout-center__right">
+          <SideRight v-show="route.meta?.isRightSide"></SideRight>
         </u-region>
       </u-layout>
     </u-region>
@@ -103,21 +103,22 @@ onMounted(() =>
       margin-top: v-bind(topNavHeight);
     }
   }
-  .layout-base__center {
+  #layout-base__center {
     padding: 1.6rem;
     // min-height: v-bind(centerHeight);
-    .layout-center__left {
-      margin-right: 1.6rem;
+    #layout-center__left {
+      padding-right: 1.6rem;
     }
-    .layout-center__right {
-      margin-left: 1.6rem;
+    #layout-center__right {
+      padding-left: 1.6rem;
     }
-    .layout-center__left,
-    .layout-center__right {
+    #layout-center__left,
+    #layout-center__right {
       width: 20%;
       position: relative;
     }
-    .layout-center__center {
+    #layout-center__center {
+      width: calc(60% - 1.6rem * 2);
     }
   }
   .layout-base__bottom {

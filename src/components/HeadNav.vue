@@ -1,6 +1,6 @@
 <template>
   <u-layout class="head-nav" mode="row" ref="headNavElement">
-    <u-region class="head-nav-left" :span="navLeftWidth" align="center" justify="around" :title="name">
+    <u-region class="head-nav-left" :span="navLeftWidth" align="center" justify="space-around" :title="name">
       <div class="head-nav-left__image" @click="router.push('/')">
         <img :src="logo" alt="随机图片" />
       </div>
@@ -8,7 +8,7 @@
         <span>{{ name }}</span>
       </div>
     </u-region>
-    <u-region class="head-nav-menu" justify="end">
+    <u-region class="head-nav-menu" justify="flex-end">
       <u-menu>
         <template v-for="r in routes" :key="r.path">
           <u-sub-menu v-if="r.children?.length">
@@ -42,7 +42,7 @@ const headerStore = useHeaderStore()
 const appStore = useAppStore()
 
 const router = useRouter()
-const routes = computed(() => appStore.routes?.filter((v: RouteRecordRaw) => v.name && !v.meta?.isHidden))
+const routes = computed(() => appStore.routes?.filter((v: RouteRecordRaw) => v.name && v.meta?.isAffix))
 
 const logo = computed(() => headerStore.logo)
 const name = computed(() => headerStore.name)
@@ -60,7 +60,7 @@ defineExpose({
 .head-nav {
   position: fixed;
   top: 0;
-  z-index: 101;
+  z-index: 10000;
   box-shadow: var(--uc-shadow-2);
   background-color: var(--uc-background-1);
   padding: 0.5rem 1rem;

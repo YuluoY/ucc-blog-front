@@ -9,7 +9,7 @@
     <u-region class="base-info-card__bio" justify="center">
       {{ user.bio }}
     </u-region>
-    <u-region class="base-info-card__socials" justify='space-around' style="width: 100%;">
+    <u-region class="base-info-card__socials" justify='space-between' style="width: 100%;">
       <template v-for="social in user.socials" :key="social.type">
         <a :href="social.url" target="_blank" style="display: flex; align-items: center; gap: 1rem; flex-direction: column;">
           <img :src="social.logo" :alt="social.type" width="50" />
@@ -21,14 +21,14 @@
 </template>
 
 <script lang="ts" setup>
-import { useUserStore } from '@/stores/model/user'
+import { useLeftSideStore } from '@/stores/leftSide'
 import { storeToRefs } from 'pinia'
 
 defineOptions({
   name: 'BaseInfoCard'
 })
 
-const { user } = storeToRefs(useUserStore())
+const { user } = storeToRefs(useLeftSideStore())
 
 console.log(user.value)
 

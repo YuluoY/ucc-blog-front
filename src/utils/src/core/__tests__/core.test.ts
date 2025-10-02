@@ -89,7 +89,7 @@ test('watchFn', done => {
   const callback = () => {
     ready.value = true
   }
-  const cancel = watchFn(fn, callback, { delay: 100, limit: 1 })
+  const cancel = watchFn(fn, callback, { delay: 100 })
   condition.value = true
   setTimeout(() => {
     expect(ready.value).toBe(true)
@@ -104,7 +104,7 @@ test('watchFn', done => {
   const callback2 = () => {
     ready2.value = !ready2.value
   }
-  const cancel2 = watchFn(fn2, callback2, { delay: 100, limit: 2 })
+  const cancel2 = watchFn(fn2, callback2, { delay: 100 })
   condition2.value = true
   setTimeout(() => {
     expect(ready2.value).toBe(true)

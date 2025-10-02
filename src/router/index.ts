@@ -11,16 +11,7 @@ const ReadView = () => import('@/views/ReadView.vue')
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    redirect: '/home',
-    meta: {
-      title: '首页',
-      isAffix: true,
-      index: 1,
-      isHero: true,
-      isHidden: true,
-      isLeftSide: true,
-      isRightSide: true
-    }
+    redirect: '/home'
   },
   {
     path: '/home',
@@ -63,8 +54,7 @@ const routes: RouteRecordRaw[] = [
     component: ReadView,
     meta: {
       title: '阅读',
-      isAffix: true,
-      isHidden: true
+      isAffix: false
     }
   },
   {

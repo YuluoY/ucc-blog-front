@@ -473,36 +473,33 @@ export function getValue<T = any>(obj: Record<string, any>, path: string | strin
  * @link        https://github.com/YuluoY
  * @date        2024-09-14
  * @param       {(() => Promise<boolean>) | (() => boolean)}    fn                  - 监听的函数
- * @param       {(() => Promise<void>) | (() => void)}          callback            - 回调函数
+ * @param       {(result: T) => void}                           callback            - 回调函数
  * @param       {object}                                        [options]           - 配置项
- * @param       {number}                                        [options.delay]     - 执行间隔，单位毫秒，默认 100
- * @param       {number}                                        [options.limit]     - 执行次数限制，默认 1
- * @param       {number}                                        [options.timeout]   - 超时时间，单位毫秒，默认 0，表示不限制
+ * @param       {number}                                        [options.delay=200]  - 执行间隔，单位毫秒，默认 200
+ * @param       {number}                                        [options.timeout=3000]   - 超时时间，单位毫秒，默认 3000，表示不限制
  * @param       {() => void}                                    [options.timeoutFn] - 超时回调函数
  * @returns     {() => void}                                                        - 取消监听的函数
  * @example
  * ```ts
  * const cancel = watchFn(() => isReady(), () => {
  *   console.log('isReady')
- * }, { delay: 100, limit: 1, timeout: 5000, timeoutFn: () => {} })
+ * }, { delay: 100, timeout: 5000, timeoutFn: () => {} })
  * // 取消监听
  * cancel()
  * ```
  */
-export function watchFn(
-  fn: (() => boolean) | (() => Promise<boolean>),
-  callback: (() => void) | (() => Promise<void>),
+export function watchFn<T = any>(
+  fn: (() => T) | (() => Promise<T>),
+  callback: (result: T) => void,
   options: Partial<{
     delay: number
-    limit: number
     timeout: number
     timeoutFn: () => void
   }> = {}
 ): () => void
 {
-  const { delay = 100, limit = 1, timeout = 0, timeoutFn } = options
+  const { delay = 200, timeout = 3000, timeoutFn } = options
 
-  let count = 0
   const startTime = Date.now()
   const interval = setInterval(async() =>
   {
@@ -512,14 +509,9 @@ export function watchFn(
       clearInterval(interval)
       return
     }
-    if (await fn())
-    {
-      await callback()
-      if (++count >= limit) clearInterval(interval)
-    }
-    else
-      count = 0
-    
+    const result = await fn()
+    if (result)
+      callback(result)
   }, delay) as any
 
   return () => clearInterval(interval)

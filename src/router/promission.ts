@@ -4,23 +4,25 @@ import { useAppStore } from '@/stores/app'
 
 const permission = (router: Router) =>
 {
-  let isAddDynamicRoutes = false
+  // 添加动态路由
+  dynamicRoutes.forEach(route => router.addRoute(route))
 
   router.beforeEach(async(to, from, next) =>
   {
-    const { replRoutes } = useAppStore()
-    if (!isAddDynamicRoutes)
+    // 如果路由不存在，重定向到首页
+    if (to.matched.length === 0)
     {
-      // 1. 添加动态路由
-      dynamicRoutes.forEach(route => router.addRoute(route))
-      replRoutes(router.getRoutes())
-      isAddDynamicRoutes = true
-      // 2. 触发重定向
-      next({ ...to, replace: true })
+      next({ name: 'NotFound', replace: true })
       return
     }
 
     next()
+  })
+
+  router.afterEach(() =>
+  {
+    const { replRoutes } = useAppStore()
+    replRoutes(router.getRoutes())
   })
 }
 
