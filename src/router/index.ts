@@ -7,6 +7,7 @@ const AboutView = () => import('@/views/AboutView.vue')
 const NotFoundView = () => import('@/views/NotFoundView.vue')
 const ArchiveView = () => import('@/views/ArchiveView.vue')
 const ReadView = () => import('@/views/ReadView.vue')
+const MessageView = () => import('@/views/MessageView.vue')
 
 const routes: RouteRecordRaw[] = [
   {
@@ -46,6 +47,16 @@ const routes: RouteRecordRaw[] = [
       index: 2,
       isLeftSide: true,
       isRightSide: true
+    }
+  },
+  {
+    path: '/message',
+    name: 'message',
+    component: MessageView,
+    meta: {
+      index: 4,
+      title: '留言',
+      isAffix: true
     }
   },
   {

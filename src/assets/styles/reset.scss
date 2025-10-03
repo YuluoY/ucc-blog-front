@@ -12,3 +12,7 @@ a {
   color: #333;
   text-decoration: none
 }
+
+.md-editor-preview .md-editor-code .md-editor-code-head {
+  z-index: 9999 !important;
+}

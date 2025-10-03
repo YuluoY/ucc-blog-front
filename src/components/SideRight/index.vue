@@ -1,13 +1,13 @@
 <template>
-  <u-layout ref="sideLeftRef" class="side-left" :gutter="16" mode="column">
-    <u-region class="side-left-item">
-      <u-card body-class="side-left-item-card" shadow="always" header="个人信息" collapse>
-        <BaseInfoCard></BaseInfoCard>
+  <u-layout ref="sideRightRef" class="side-right" :gutter="16" mode="column">
+    <u-region class="side-right-item">
+      <u-card body-class="side-right-item-card" shadow="always" header="最新文章" collapse>
+        asd
       </u-card>
     </u-region>
-    <u-region class="side-left-item">
-      <u-card body-class="side-left-item-card" shadow="always" header="最新文章" collapse>
-        <LatestArticleCard></LatestArticleCard>
+    <u-region class="side-right-item">
+      <u-card body-class="side-right-item-card" shadow="always" header="最新文章" collapse>
+        asd
       </u-card>
     </u-region>
   </u-layout>
@@ -16,21 +16,21 @@
 <script setup lang="ts">
 import type { ULayout } from 'ucc-ui'
 import { useFixed } from '@/composables/useFixed'
-import BaseInfoCard from './BaseInfoCard.vue'
-import LatestArticleCard from './LatestArticleCard.vue'
 import { useHeaderStore } from '@/stores/header'
+
 defineOptions({
-  name: 'SideLeft'
+  name: 'SideRight'
 })
+
 const headerStore = useHeaderStore()
 
-const sideLeftRef = ref<InstanceType<typeof ULayout>>()
-const sideLeftEl = computed(() => sideLeftRef.value?.$el)
+const sideRightRef = ref<InstanceType<typeof ULayout>>()
+const sideRightEl = computed(() => sideRightRef.value?.$el)
 
 onMounted(() =>
 {
   useFixed({
-    target: sideLeftEl.value as HTMLElement,
+    target: sideRightEl.value as HTMLElement,
     top: 20,
     zIndex: 6,
     offsetTop: headerStore.height
@@ -39,7 +39,7 @@ onMounted(() =>
 </script>
 
 <style scoped lang="scss">
-.side-left {
+.side-right {
   position: sticky;
   top: 0;
   left: 0;
@@ -51,11 +51,11 @@ onMounted(() =>
   overflow: hidden;
   box-sizing: border-box;
 
-  .side-left-item {
+  .side-right-item {
     width: 100%;
     height: fit-content;
     flex: unset;
-    :deep(.side-left-item-card) {
+    :deep(.side-right-item-card) {
       width: 100%;
       height: fit-content;
       display: flex;

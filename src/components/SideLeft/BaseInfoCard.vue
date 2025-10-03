@@ -30,8 +30,6 @@ defineOptions({
 
 const { user } = storeToRefs(useLeftSideStore())
 
-console.log(user.value)
-
 </script>
 
 <style scoped lang="scss">

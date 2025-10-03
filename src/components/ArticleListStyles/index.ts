@@ -1,13 +1,11 @@
+import type { ArticleListType } from '@/types'
 import ArticleBase from './ArticleBase.vue'
+import type { Component } from 'vue'
 
-export interface IArticleListStyles {
-  base: typeof ArticleBase
-  // waterfall: any
-  // card: any
-}
-
-const components: IArticleListStyles = {
-  base: ArticleBase
+const components: Record<ArticleListType, Component> = {
+  base: ArticleBase,
+  waterfall: ArticleBase,
+  card: ArticleBase
 }
 
 export default components

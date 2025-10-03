@@ -21,7 +21,7 @@
     </u-region>
     <u-region
       region="center"
-      id="layout-base__center"
+      class="layout-base__center"
       :style="{ marginTop: route.meta?.isHero ? '0' : topNavHeight }"
     >
       <u-layout>
@@ -51,7 +51,7 @@ import HeadNav from '@/components/HeadNav.vue'
 import BottomInfo from '@/components/BottomInfo.vue'
 import HomeHero from '@/components/HomeHero.vue'
 import SideLeft from '@/components/SideLeft/index.vue'
-import SideRight from '@/components/SideRight.vue'
+import SideRight from '@/components/SideRight/index.vue'
 import { useHeaderStore } from '@/stores/header'
 import { useFooterStore } from '@/stores/footer'
 import { useHeroStore } from '@/stores/hero'
@@ -103,7 +103,7 @@ onMounted(() =>
       margin-top: v-bind(topNavHeight);
     }
   }
-  #layout-base__center {
+  .layout-base__center {
     padding: 1.6rem;
     // min-height: v-bind(centerHeight);
     #layout-center__left {

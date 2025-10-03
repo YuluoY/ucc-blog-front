@@ -24,7 +24,7 @@ declare module 'vue' {
     SideLeftItem1: typeof import('./components/SideLeft/SideLeftItem1.vue')['default']
     SideLeftItem2: typeof import('./components/SideLeft/SideLeftItem2.vue')['default']
     SideLeftNewArticle: typeof import('./components/SideLeft/SideLeftNewArticle.vue')['default']
-    SideRight: typeof import('./components/SideRight.vue')['default']
+    SideRight: typeof import('./components/SideRight/index.vue')['default']
     SubMenu: typeof import('./components/Menu/src/SubMenu.vue')['default']
   }
 }
