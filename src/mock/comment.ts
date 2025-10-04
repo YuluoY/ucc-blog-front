@@ -1,13 +1,15 @@
-import type { ICategory } from '@/types/models/category'
+import type { IComment } from '@/types/models/comment'
 import { faker } from '@faker-js/faker'
+import { createArticle } from './article'
 import { createUser } from './user'
 
-export const createCategory = (): ICategory =>
+export const createComment = (): IComment =>
 {
   return {
     id: faker.string.uuid(),
-    name: faker.lorem.word(),
-    desc: faker.lorem.paragraphs(3).substring(0, 500),
+    content: faker.lorem.sentence(),
+    pid: faker.string.uuid(),
+    article: createArticle(),
     user: createUser(),
     createdAt: faker.date.past().toISOString().split('T')[0],
     updatedAt: faker.date.past().toISOString().split('T')[0]

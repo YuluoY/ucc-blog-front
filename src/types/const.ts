@@ -6,7 +6,10 @@ export const CTheme = {
 
 export const CTables = {
   USER: 'user',
-  ARTICLE: 'article'
+  ARTICLE: 'article',
+  COMMENT: 'comment',
+  CATEGORY: 'category',
+  TAG: 'tag'
 } as const
 
 export const CArticleStatus = {
